@@ -1,1 +1,0 @@
-export const logo_image = "https://img.freepik.com/premium-vector/camping-site-with-tent-fire-equipment-cartoon-composition_1284-54939.jpg";

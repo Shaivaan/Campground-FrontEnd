@@ -1,12 +1,15 @@
 .main{
     border-radius: 10px;
-    width: 95%;
-    height: 95vh;
+    width: 75%;
+    height: 75vh;
     margin: auto;
     overflow: hidden;
     display: flex;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+    background-color: #FBFACD;
+    margin-top: 10vh;
 }
+
 
 .auth_left{
     width: 65%;
@@ -20,13 +23,14 @@
 }
 
 .logo_image{
-    height: 95vh;
+    height: 100%;
     width: 100%;
 }
 
 .input_box{
     width: 90%;
     margin: auto;
+    
 }
 
 .input_box > div{
@@ -48,4 +52,23 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
   margin: 0; 
+}
+
+.errorText{
+    color: red;
+    margin: 5px 0px;
+    font-size: 12px;
+}
+
+.googleIcon{
+    margin-right: 10px;
+}
+
+.centerAlign{
+    text-align: center;
+}
+
+a{
+    color: cadetblue;
+    text-decoration: none;
 }
