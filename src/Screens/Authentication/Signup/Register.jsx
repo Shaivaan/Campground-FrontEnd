@@ -73,6 +73,7 @@ function Register() {
       res.user && setMessageType("success");
       setSnackBarMessage("Registered Succesfully");
       setSnackBarVisible(true);
+      localStorage.setItem("token",res.token);
       setTimeout(() => {
         navigate("/");
       }, 2000);

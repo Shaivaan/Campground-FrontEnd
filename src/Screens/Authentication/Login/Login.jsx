@@ -86,6 +86,7 @@ function Login() {
       res.user && setMessageType("success");
       setSnackBarMessage("Login Successfully");
       setSnackBarVisible(true);
+      localStorage.setItem("token",res.token);
       setTimeout(() => {
         navigate("/");
       }, 2000);

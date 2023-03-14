@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, TextField, Button, Snackbar, Alert, Slide, IconButton, InputAdornment } from "@mui/material";
 import styles from "../Authentication.module.css";
 import {
@@ -28,12 +28,14 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 function ForgotPassword() {
   const navigate = useNavigate();
   const [snackBarVisible, setSnackBarVisible] = useState(false);
+  let interval;
   const [snackBarMessage, setSnackBarMessage] = useState("");
   const [messageType, setMessageType] = useState("");
   const [otpVisible, setOtpVisible] = useState(false);
   const [resetPassword, setResetPassword] = useState(false);
   const [resetEmail, setResetEmail] = useState("");
   const [showPassword, setShowPassword] = useState("password");
+  const [otpTimer,setOtpTimer] = useState(60);
 
 
   const TransitionRight = (props) => {
@@ -47,6 +49,28 @@ function ForgotPassword() {
   const goBack = () => {
     navigate(-1);
   };
+
+
+  useEffect(() => {
+   if(otpVisible && !resetPassword){
+    interval = setInterval(() => {
+      setOtpTimer(prevTimer => prevTimer - 1);
+    }, 1000);
+  } 
+
+  if(otpTimer == 0){
+    clearInterval(interval);
+    setOtpVisible(false);
+    setSnackBarMessage("OTP expired")
+    setMessageType("error");
+    setSnackBarVisible(true);
+  }
+
+    // Cleanup function to clear the interval
+    return () => {
+      clearInterval(interval);
+    };
+  }, [otpVisible,otpTimer]);
 
   const handleShowPassword = () => {
     showPassword == "password" && setShowPassword("text");
@@ -103,12 +127,19 @@ function ForgotPassword() {
         res.json().then((res) => {
           res.message == "OTP sent successfully" && setOtpVisible(true);
           handleSnackProcess(res);
+          
         });
       })
       .catch((res) => {
         console.log(res);
       });
   };
+
+  const startTimer = () => {
+    setInterval(() => {
+      setOtpTimer(prevTimer => prevTimer - 1);
+     }, 1000);
+  }
 
   const handleCheckOtp = (data) => {
     data.otp = +data.otp;
@@ -131,7 +162,9 @@ function ForgotPassword() {
             console.log(data);
           } else {
             setSnackBarMessage(res.message);
-            res.message = "Invalid OTP" && setMessageType("error");
+            res.message = "Invalid OTP" && setMessageType("error") && setTimeout(()=>{
+              startTimer()
+            },2000);
             setSnackBarVisible(true);
           }
         });
@@ -336,6 +369,22 @@ function ForgotPassword() {
             sx={{ width: "100%" }}
           >
             {snackBarMessage}
+          </Alert>
+        </Snackbar>
+
+        <Snackbar
+          // TransitionComponent={TransitionRight}
+          open={otpVisible && !resetPassword}
+          anchorOrigin={{ vertical: "top", horizontal: "left" }}
+          autoHideDuration={2000}
+          // onClose={handleSnackBarClose}
+        >
+          <Alert
+            // onClose={handleSnackBarClose}
+            severity={"info"}
+            sx={{ width: "100%" }}
+          >
+            {`00 : ` + otpTimer + ` seconds`}
           </Alert>
         </Snackbar>
       </Box>
