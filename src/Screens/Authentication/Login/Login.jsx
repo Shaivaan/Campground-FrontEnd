@@ -22,9 +22,9 @@ import { GoogleLogin } from 'react-google-login';
 function Login() {
   const clientId = '532654142650-g2dd03hso45lf4ev3p692lpnk6j0giet.apps.googleusercontent.com';
   const [showPassword, setShowPassword] = useState("password");
+  const navigate = useNavigate();
   const [snackBarVisible, setSnackBarVisible] = useState(false);
   const [snackBarMessage, setSnackBarMessage] = useState("");
-  const navigate = useNavigate();
   const [messageType, setMessageType] = useState("");
   const handleShowPassword = () => {
     showPassword == "password" && setShowPassword("text");
@@ -206,7 +206,9 @@ function Login() {
           )}
         </Formik>
       </Box>
-      <Snackbar
+    
+    </Box>
+    <Box className = {styles.parallel}>  <Snackbar
         TransitionComponent={TransitionRight}
         open={snackBarVisible}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
@@ -220,9 +222,7 @@ function Login() {
         >
           {snackBarMessage}
         </Alert>
-      </Snackbar>
-    </Box>
-    <Box className = {styles.parallel}></Box>
+      </Snackbar></Box>
     </>
   );
 }

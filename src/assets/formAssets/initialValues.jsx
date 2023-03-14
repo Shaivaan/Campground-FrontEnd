@@ -20,3 +20,8 @@ export const forgot_password_values = {
 export const forgot_password_otp = {
     otp:"",
 };
+
+export const password_initial_values = {
+    email:"",
+    password:"",
+};

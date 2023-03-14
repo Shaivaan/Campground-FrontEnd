@@ -270,7 +270,8 @@ function Register() {
           )}
         </Formik>
       </Box>
-      <Snackbar
+    </Box>
+    <Box className = {styles.parallel}>  <Snackbar
         TransitionComponent={TransitionRight}
         open={snackBarVisible}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
@@ -284,9 +285,7 @@ function Register() {
         >
           {snackBarMessage}
         </Alert>
-      </Snackbar>
-    </Box>
-    <Box className = {styles.parallel}></Box>
+      </Snackbar></Box>
     </>
   );
 }

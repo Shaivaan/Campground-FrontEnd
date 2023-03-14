@@ -33,5 +33,17 @@ export const forgot_password_schema = Yup.object().shape({
 
 export const otp_schema = Yup.object().shape({
   otp: Yup.string()
-    .required("OTP is required"),
+  .matches(/^\d{6}$/, 'OTP must be 6 digits')
+  .required('OTP is required'),
+});
+
+
+export const password_schema = Yup.object().shape({
+  password: Yup.string()
+  .min(8, "Password must be at least 8 characters long")
+  .matches(
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/,
+    "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character"
+  )
+  .required("Password is required"),
 });

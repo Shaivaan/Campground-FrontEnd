@@ -5,8 +5,8 @@
     display: flex;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
     backdrop-filter: blur(20px);
-    width: 900px;
-    height: 75vh;
+    width: 75vw;
+    height: 80vh;
    
 }
 
@@ -18,7 +18,8 @@
     top: 0;
     z-index: -1;
     opacity: 0.9;
-   background-image: url("https://avaelgo.ro/wp-content/uploads/2017/07/Landing-page-background.jpg");
+   background-image: url("https://images.pexels.com/photos/7130555/pexels-photo-7130555.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
+   /* background-color: #F8EFE8; */
    background-position: center;
    background-repeat: no-repeat;
    background-size: cover;
@@ -130,4 +131,10 @@ a{
 .forPassCont >div > a {
     color: black;
     font-size: 12px;
+}
+
+.butt_containn{
+    display: flex;
+    margin-top: 15px;
+    
 }
