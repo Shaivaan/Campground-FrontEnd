@@ -7,6 +7,18 @@ export const register_initial_values = {
     last_name:""
 };
 
+
+export const user_initial_values = {
+    phone_number:"",
+    admin:false,
+    first_name:"",
+    last_name:"",
+    city:"",
+    state:"",
+    address:"",
+    pincode:""
+};
+
 export const login_initial_values = {
     email:"",
     password:"",

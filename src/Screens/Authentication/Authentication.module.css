@@ -7,31 +7,29 @@
     backdrop-filter: blur(20px);
     width: 75vw;
     height: 80vh;
-   
+    margin-top: 10vh;
+}
+
+.infoIcon{
+    color: blue;
+    cursor: pointer;
 }
 
 .parallel{
     position: absolute;
-    height: 100%;
+    height: 100vh;
     width: 100%;
     left: 0;
     top: 0;
     z-index: -1;
     opacity: 0.9;
    background-image: url("https://images.pexels.com/photos/7130555/pexels-photo-7130555.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
-   /* background-color: #F8EFE8; */
    background-position: center;
    background-repeat: no-repeat;
    background-size: cover;
 }
 
-body{
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    overflow: hidden;
-    display: flex;
-}
+
 
 .small_logo{
     height: 100px;
@@ -136,5 +134,12 @@ a{
 .butt_containn{
     display: flex;
     margin-top: 15px;
-    
 }
+
+.account_type{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    column-gap: 5px;
+}
+

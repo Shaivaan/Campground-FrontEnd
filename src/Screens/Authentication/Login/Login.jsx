@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   TextField,
@@ -93,9 +93,12 @@ function Login() {
     }
   };
 
+  const handleChangeValues = (setFieldValue, name, value) => {
+    setFieldValue(name, value);
+  };
+
   const handleGoogleAuth = ()=>{
   // window.location.href = "http://localhost:3000/auth/google";
-
   }
 
   return (
@@ -120,6 +123,7 @@ function Login() {
             handleChange,
             handleBlur,
             handleSubmit,
+            setFieldValue,
             isSubmitting,
             /* and other goodies */
           }) => (
@@ -129,10 +133,16 @@ function Login() {
                   <Box className={styles.label}>Email</Box>
                   <Box>
                     <TextField
-                      onChange={handleChange}
-                      type={"email"}
+                      onChange={(e) => {
+                        handleChangeValues(
+                          setFieldValue,
+                          "email",
+                          e.target.value.trim()
+                        );
+                      }}
                       autoComplete={"off"}
                       fullWidth
+                      value={values.email.trim()}
                       size={"small"}
                       placeholder={"Enter Email"}
                       name={"email"}
@@ -147,7 +157,14 @@ function Login() {
                   <Box className={styles.label}>Password</Box>
                   <Box>
                     <TextField
-                      onChange={handleChange}
+                      onChange={(e) => {
+                        handleChangeValues(
+                          setFieldValue,
+                          "password",
+                          e.target.value.trim()
+                        );
+                      }}
+                      value={values.password.trim()}
                       type={showPassword}
                       autoComplete={"off"}
                       fullWidth

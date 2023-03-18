@@ -47,3 +47,20 @@ export const password_schema = Yup.object().shape({
   )
   .required("Password is required"),
 });
+
+
+export const user_validation_schema = Yup.object().shape({
+  phone_number: Yup.number()
+    .typeError("Phone number must be a number")
+    .required("Phone number is required"),
+  admin: Yup.string().required(),
+  first_name: Yup.string().required("First Name is required"),
+  last_name: Yup.string().required("Last Name is required"),
+  pincode: Yup.string().notRequired()
+  .test("pincode", "Pincode should be of 6 digits", function(value) {
+    return !value || (value && value.length === 6);
+  }),  
+},
+
+
+);
