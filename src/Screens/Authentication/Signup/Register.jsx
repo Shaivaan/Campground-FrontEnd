@@ -33,8 +33,8 @@ function Register() {
   const [showPassword, setShowPassword] = useState("password");
   const [snackBarVisible, setSnackBarVisible] = useState(false);
   const [snackBarMessage, setSnackBarMessage] = useState("");
-  const navigate = useNavigate();
   const [messageType, setMessageType] = useState("");
+  const navigate = useNavigate();
 
   const handleShowPassword = () => {
     showPassword == "password" && setShowPassword("text");

@@ -4,7 +4,6 @@
     height: 600px;
     display: flex;
     justify-content: space-evenly;
-    padding: 10px;
 }
 
 .name_container{
@@ -44,4 +43,13 @@
 
 .save_butt{
     margin-left: 20px !important;
+}
+
+.loaderDiv{
+    display: flex;
+    height: 80vh;
+    flex-direction: column;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
 }

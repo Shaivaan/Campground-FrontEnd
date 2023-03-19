@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  CircularProgress,
   FormControl,
   IconButton,
   InputAdornment,
@@ -21,6 +22,7 @@ import {
 } from "../../assets/assets";
 import { user_initial_values } from "../../assets/formAssets/initialValues";
 import { user_validation_schema } from "../../assets/formAssets/validationSchema";
+import CustomSnackBar from "../../Components/Snackbar/Snackbar";
 import styles from "./profile.module.css";
 
 export const Profile = () => {
@@ -29,7 +31,10 @@ export const Profile = () => {
     setFieldValue(name, value);
   };
   const [userData, setUserData] = useState(user_initial_values);
-  const [loader,setLoader] = useState(false);
+  const [snackBarVisible, setSnackBarVisible] = useState(false);
+  const [isLoading,setLoading] = useState(true);
+  const [snackBarMessage, setSnackBarMessage] = useState("");
+  const [messageType, setMessageType] = useState("");
   const [stateData, setStateData] = useState([]);
   const [citiesData, setCitiesData] = useState([]);
   const handleEdit = () => {
@@ -39,6 +44,7 @@ export const Profile = () => {
   const handleCancel = () => {
     setShowOrSave(true);
   };
+
 
   const getUser = () => {
     fetch(`${get_user_api}`, {
@@ -53,7 +59,12 @@ export const Profile = () => {
       })
       .catch((res) => {
         console.log(res);
-      });
+      })
+      .finally((res)=>{
+        setLoading(false);
+      })
+      ;
+
   };
 
   const handlesetUserData=(res)=>{
@@ -110,6 +121,10 @@ export const Profile = () => {
         res.json().then((res) => {
           console.log("respionse",res)
           handlesetUserData(res);
+          setShowOrSave(true);
+          setMessageType("success");
+          setSnackBarMessage("Updated Successfully!");
+          setSnackBarVisible(!snackBarVisible);
         });
       })
       .catch((res) => {
@@ -124,6 +139,8 @@ export const Profile = () => {
 
   return (
     <>
+     <CustomSnackBar snackBarVisible={snackBarVisible} messageType={ messageType} message={snackBarMessage}/>
+    {isLoading ? <Box className={styles.loaderDiv}><CircularProgress/></Box> :  <Box>
       <Box>
         <Box className={styles.buttonDiv}>
           {!showOrSave ? (
@@ -328,7 +345,7 @@ export const Profile = () => {
                           </Select>
                         </FormControl>
                         <Box className={styles.errorText}>
-                          {errors.city && touched.city && errors.city + "*"}
+                          {errors.state && touched.state && errors.state + "*"}
                         </Box>
                       </Box>
                     </Box>
@@ -547,6 +564,7 @@ export const Profile = () => {
         </Box>
         <Box className={styles.profile_right}></Box>
       </Box>
+      </Box>  }   
     </>
   );
 };

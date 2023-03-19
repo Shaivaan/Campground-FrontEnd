@@ -37,3 +37,22 @@ export const password_initial_values = {
     email:"",
     password:"",
 };
+
+export const add_campground_initial_values = {
+        name: "",
+        description: "",
+        highlight: [],
+        price: "",
+        city: "",
+        address: "",
+        pincode: "",
+        state: "",
+        coordinates: [
+            19.976527363752915,
+            73.24924504337929
+        ], // latitude then longitude order is importent
+        image_1:"",
+        image_2:"",
+        image_3:"",
+        image_4:""
+}

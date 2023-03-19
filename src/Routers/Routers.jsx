@@ -6,6 +6,7 @@ import Register from '../Screens/Authentication/Signup/Register';
 import ForgotPassword from '../Screens/Authentication/ForgotPassword/ForgotPassword';
 import  Dashboard  from '../Components/NavbarAndSidebar/Template';
 import { Profile } from '../Screens/Profile/Profile';
+import AddCampground from '../Screens/AddCampground/AddCampground';
 
 function Routers() {
   const navigate = useNavigate();
@@ -31,6 +32,7 @@ function Routers() {
             <Route path='/login' element={<Login/>}/>
             <Route path='/register' element={<Register/>}/>
             <Route path='/forgotpassword' element={<ForgotPassword/>}/>
+            <Route path='/addcampground' element={<Dashboard element={<AddCampground/>}/>}/>
         </Routes>
     </Box>
   )
