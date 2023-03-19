@@ -25,9 +25,15 @@
 }
 
 .addImageDiv{
-    border: 1px solid red;
-    width: 250px;
+    border-radius: 20px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    width: 300px;
     height: 250px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
 }
 
 .mainLeft{
@@ -45,4 +51,9 @@
 
 .locationDiv{
     margin-top: 50px;
+}
+
+.campImage{
+    height: 100%;
+    width: 100%;
 }

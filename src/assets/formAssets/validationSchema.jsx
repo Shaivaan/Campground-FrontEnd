@@ -60,7 +60,83 @@ export const user_validation_schema = Yup.object().shape({
   .test("pincode", "Pincode should be of 6 digits", function(value) {
     return !value || (value && value.length === 6);
   }),  
-},
+},);
+
+export const add_campground_validation_schema = Yup.object().shape({
+  name: Yup.string().required("Campground Name is required"),
+  description: Yup.string().required("Campground description is required"),
+  price: Yup.number()
+  .required("Price is required")
+  .min(1000, "Price must be at least 1000")
+  .max(15000, "Price must be at most 15000"),
+  city: Yup.string().required("Campground city is required"),
+  address: Yup.string().required("Campground address is required"),
+  state: Yup.string().required("Campground state is required"),
+  pincode:  Yup.string().required("Pincode is required")
+  .test("pincode", "Pincode should be of 6 digits", function(value) {
+    return !value || (value && value.length === 6);
+  }),
+  
+  // highlight: [],
+  // coordinates: [
+  //     19.976527363752915,
+  //     73.24924504337929
+  // ], // latitude then longitude order is importent
+  image1:Yup
+  .mixed()
+  .required("Image 1 is required") .when("image1",{
+    is:(value) => typeof(value) != "string",
+    then:Yup.mixed().test(
+      'is-correct-file',
+      'Uploaded file is not valid.Only JPEG,PNG files are allowed.',
+       checkIfFilesAreCorrectType
+    )
+  }),
+  image2:Yup
+  .mixed()
+  .required("Image 2 is required") .when("image2",{
+    is:(value) => typeof(value) != "string",
+    then:Yup.mixed().test(
+      'is-correct-file',
+      'Uploaded file is not valid.Only JPEG,PNG files are allowed.',
+       checkIfFilesAreCorrectType
+    )
+  }),
+  image3:Yup
+  .mixed()
+  .required("Image 3 is required") .when("image3",{
+    is:(value) => typeof(value) != "string",
+    then:Yup.mixed().test(
+      'is-correct-file',
+      'Uploaded file is not valid.Only JPEG,PNG files are allowed.',
+       checkIfFilesAreCorrectType
+    )
+  }),
+  image4:Yup
+  .mixed()
+  .required("Image 4 is required") .when("image4",{
+    is:(value) => typeof(value) != "string",
+    then:Yup.mixed().test(
+      'is-correct-file',
+      'Uploaded file is not valid.Only JPEG,PNG files are allowed.',
+       checkIfFilesAreCorrectType
+    )
+  })
+},[
+  ["image1","image1"],
+  ["image2","image2"],
+  ["image3","image3"],
+  ["image4","image4"]
+])
 
 
-);
+
+function checkIfFilesAreCorrectType(files){
+  let valid = true
+  if (files) {
+    if (!['image/jpeg', 'image/png'].includes(files.type)) {
+      valid = false
+    }
+  }
+  return valid;
+}
