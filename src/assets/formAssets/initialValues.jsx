@@ -47,7 +47,7 @@ export const add_campground_initial_values = {
         address: "",
         pincode: "",
         state: "",
-        coordinates: [19.976527363752915,73.24924504337929], // latitude then longitude order is importent
+        coordinates: [], // latitude then longitude order is importent
         image1:null,
         image2:null,
         image3:null,

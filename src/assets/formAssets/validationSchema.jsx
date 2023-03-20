@@ -82,52 +82,19 @@ export const add_campground_validation_schema = Yup.object().shape({
   //     19.976527363752915,
   //     73.24924504337929
   // ], // latitude then longitude order is importent
-  image1:Yup
-  .mixed()
-  .required("Image 1 is required") .when("image1",{
-    is:(value) => typeof(value) != "string",
-    then:Yup.mixed().test(
-      'is-correct-file',
-      'Uploaded file is not valid.Only JPEG,PNG files are allowed.',
-       checkIfFilesAreCorrectType
-    )
-  }),
-  image2:Yup
-  .mixed()
-  .required("Image 2 is required") .when("image2",{
-    is:(value) => typeof(value) != "string",
-    then:Yup.mixed().test(
-      'is-correct-file',
-      'Uploaded file is not valid.Only JPEG,PNG files are allowed.',
-       checkIfFilesAreCorrectType
-    )
-  }),
-  image3:Yup
-  .mixed()
-  .required("Image 3 is required") .when("image3",{
-    is:(value) => typeof(value) != "string",
-    then:Yup.mixed().test(
-      'is-correct-file',
-      'Uploaded file is not valid.Only JPEG,PNG files are allowed.',
-       checkIfFilesAreCorrectType
-    )
-  }),
-  image4:Yup
-  .mixed()
-  .required("Image 4 is required") .when("image4",{
-    is:(value) => typeof(value) != "string",
-    then:Yup.mixed().test(
-      'is-correct-file',
-      'Uploaded file is not valid.Only JPEG,PNG files are allowed.',
-       checkIfFilesAreCorrectType
-    )
-  })
-},[
-  ["image1","image1"],
-  ["image2","image2"],
-  ["image3","image3"],
-  ["image4","image4"]
-])
+  image1: Yup.mixed()
+  .notOneOf([null], "Image 1 is required")
+  .test("is-correct-file", "Uploaded file is not valid. Only JPEG, PNG files are allowed.", checkIfFilesAreCorrectType),
+  image2:Yup.mixed()
+  .notOneOf([null], "Image 2 is required")
+  .test("is-correct-file", "Uploaded file is not valid. Only JPEG, PNG files are allowed.", checkIfFilesAreCorrectType),
+  image3:Yup.mixed()
+  .notOneOf([null], "Image 3 is required")
+  .test("is-correct-file", "Uploaded file is not valid. Only JPEG, PNG files are allowed.", checkIfFilesAreCorrectType),
+  image4:Yup.mixed()
+  .notOneOf([null], "Image 4 is required")
+  .test("is-correct-file", "Uploaded file is not valid. Only JPEG, PNG files are allowed.", checkIfFilesAreCorrectType)
+},)
 
 
 

@@ -361,6 +361,7 @@ export const Profile = () => {
                             onChange={handleChange}
                             inputProps={{ "aria-label": "Without label" }}
                           >
+                            {citiesData.length == 0 && values.city && <MenuItem value = {values.city}>{values.city}</MenuItem>}
                             {citiesData.length !== 0 &&
                               citiesData.map((el) => {
                                 return (

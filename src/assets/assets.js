@@ -20,3 +20,4 @@ export const get_user_api = `${base_url}/api/v1/user`;
 export const get_state_api = `${base_url}/api/v1/stateCity/allStates`;
 export const get_cities_api = `${base_url}/api/v1/stateCity/city`;
 export const update_user_api = `${base_url}/api/v1/user`;
+export const get_pincode_lat_lon_api = (pincode) => `https://nominatim.openstreetmap.org/search?format=json&limit=3&q=${pincode}`;

@@ -9,10 +9,10 @@ import {
 import { Box } from "@mui/system";
 import { Formik } from "formik";
 import React, { useEffect, useState } from "react";
-import { get_cities_api, get_state_api } from "../../assets/assets";
+import { get_cities_api, get_pincode_lat_lon_api, get_state_api } from "../../assets/assets";
 import { add_campground_initial_values } from "../../assets/formAssets/initialValues";
 import styles from "./AddCampground.module.css";
-import { IoAddCircleOutline } from "react-icons/io5";
+import { IoAddCircleOutline, IoCloseOutline } from "react-icons/io5";
 import { add_campground_validation_schema } from "../../assets/formAssets/validationSchema";
 
 function AddCampground() {
@@ -22,6 +22,23 @@ function AddCampground() {
   const handleChangeValues = (setFieldValue, name, value) => {
     setFieldValue(name, value);
   };
+
+  const getLonLat = (pincode,setValue) =>{
+    fetch(`${get_pincode_lat_lon_api(pincode)}`)
+      .then((res) => {
+        res.json().then((res) => {
+         if(res[0]?.lat && res[0]?.lon){
+          setValue("coordinates",[res[0]?.lat,res[0]?.lon]) 
+         }
+        });
+      })
+      .catch((res) => {
+        console.log(res);
+      });
+  }
+
+
+  
 
   const getState = () => {
     fetch(`${get_state_api}`)
@@ -59,7 +76,7 @@ function AddCampground() {
           onSubmit={(values) => {
             console.log(values);
           }}
-            validationSchema={add_campground_validation_schema}
+          validationSchema={add_campground_validation_schema}
           validateOnChange={true}
           validateOnBlur={true}
         >
@@ -163,7 +180,6 @@ function AddCampground() {
                           autoComplete="off"
                           placeholder="Enter Camground Name"
                           variant="outlined"
-                          
                         />
                       </Box>
                     </Box>
@@ -271,11 +287,14 @@ function AddCampground() {
                               "pincode",
                               e.target.value.trim()
                             );
+                            e.target.value.trim().length == 6 && getLonLat(e.target.value,setFieldValue)
                           }}
                         />
                       </Box>
                       <Box className={styles.errorText}>
-                        {errors.pincode && touched.pincode && errors.pincode + "*"}
+                        {errors.pincode &&
+                          touched.pincode &&
+                          errors.pincode + "*"}
                       </Box>
                     </Box>
                   </Box>
@@ -284,93 +303,169 @@ function AddCampground() {
                   <h2>
                     <i>Images</i>
                   </h2>
+                  {values.image1 && (
+                    <Box className={styles.crossIcon}>
+                      <IconButton
+                        onClick={() => {
+                          setFieldValue("image1", null);
+                        }}
+                      >
+                        <IoCloseOutline />
+                      </IconButton>
+                    </Box>
+                  )}
                   <Box className={styles.addImageDiv}>
-
-                     {  !values.image1  ?  <IconButton>
-                    <label htmlFor="image1">
-                      <IoAddCircleOutline />
-                      <input
-                        onChange={(e) => {
-                            handleChangeValues(
+                    {!values.image1 ? (
+                      <IconButton>
+                        <label htmlFor="image1">
+                          <IoAddCircleOutline />
+                          <input
+                          accept="image/*"
+                            onChange={(e) => {
+                              handleChangeValues(
                                 setFieldValue,
                                 "image1",
                                 e.target.files[0]
                               );
-                        }}
-                        id="image1"
-                        type={"file"}
-                        hidden
-                        />
-                    </label>
-                        </IconButton> : <img className={styles.campImage} src={URL.createObjectURL(values?.image1)}/>}     
-
-                   
+                            }}
+                            id="image1"
+                            type={"file"}
+                            hidden
+                          />
+                        </label>
+                      </IconButton>
+                    ) : (
+                      <img
+                        className={styles.campImage}
+                        src={URL.createObjectURL(values?.image1)}
+                      />
+                    )}
+                    <Box className={styles.errorText}>
+                      {errors.image1 && touched.image1 && errors.image1 + "*"}
+                    </Box>
                   </Box>
+                  {values.image2 && (
+                    <Box className={styles.crossIcon}>
+                      <IconButton
+                        onClick={() => {
+                          setFieldValue("image2", null);
+                        }}
+                      >
+                        <IoCloseOutline />
+                      </IconButton>
+                    </Box>
+                  )}
                   <Box className={styles.addImageDiv}>
-
-                     {  !values.image2  ?  <IconButton>
-                    <label htmlFor="image2">
-                      <IoAddCircleOutline />
-                      <input
-                        onChange={(e) => {
-                            handleChangeValues(
+                    {!values.image2 ? (
+                      <IconButton>
+                        <label htmlFor="image2">
+                          <IoAddCircleOutline />
+                          <input
+                          accept="image/*"
+                            onChange={(e) => {
+                              handleChangeValues(
                                 setFieldValue,
                                 "image2",
                                 e.target.files[0]
                               );
-                        }}
-                        id="image2"
-                        type={"file"}
-                        hidden
-                        />
-                    </label>
-                        </IconButton> : <img className={styles.campImage} src={URL.createObjectURL(values?.image2)}/>}     
-
-                   
+                            }}
+                            id="image2"
+                            type={"file"}
+                            hidden
+                          />
+                        </label>
+                      </IconButton>
+                    ) : (
+                      <img
+                        className={styles.campImage}
+                        src={URL.createObjectURL(values?.image2)}
+                      />
+                    )}
+                    <Box className={styles.errorText}>
+                      {errors.image2 && touched.image2 && errors.image2 + "*"}
+                    </Box>
                   </Box>
+                  {values.image3 && (
+                    <Box className={styles.crossIcon}>
+                      <IconButton
+                        onClick={() => {
+                          setFieldValue("image3", null);
+                        }}
+                      >
+                        <IoCloseOutline />
+                      </IconButton>
+                    </Box>
+                  )}
                   <Box className={styles.addImageDiv}>
-
-                     {  !values.image3  ?  <IconButton>
-                    <label htmlFor="image3">
-                      <IoAddCircleOutline />
-                      <input
-                        onChange={(e) => {
-                            handleChangeValues(
+                    {!values.image3 ? (
+                      <IconButton>
+                        <label htmlFor="image3">
+                          <IoAddCircleOutline />
+                          <input
+                          accept="image/*"
+                            onChange={(e) => {
+                              handleChangeValues(
                                 setFieldValue,
                                 "image3",
                                 e.target.files[0]
                               );
-                        }}
-                        id="image3"
-                        type={"file"}
-                        hidden
-                        />
-                    </label>
-                        </IconButton> : <img className={styles.campImage} src={URL.createObjectURL(values?.image3)}/>}     
-
-                   
+                            }}
+                            id="image3"
+                            type={"file"}
+                            hidden
+                          />
+                        </label>
+                      </IconButton>
+                    ) : (
+                      <img
+                        className={styles.campImage}
+                        src={URL.createObjectURL(values?.image3)}
+                      />
+                    )}
+                    <Box className={styles.errorText}>
+                      {errors.image3 && touched.image3 && errors.image3 + "*"}
+                    </Box>
                   </Box>
+                  {values.image4 && (
+                    <Box className={styles.crossIcon}>
+                      <IconButton
+                        onClick={() => {
+                          setFieldValue("image4", null);
+                        }}
+                      >
+                        <IoCloseOutline />
+                      </IconButton>
+                    </Box>
+                  )}
                   <Box className={styles.addImageDiv}>
-
-                     {  !values.image4  ?  <IconButton>
-                    <label htmlFor="image4">
-                      <IoAddCircleOutline />
-                      <input
-                        onChange={(e) => {
-                            handleChangeValues(
+                    {!values.image4 ? (
+                      <IconButton>
+                        <label htmlFor="image4">
+                          <IoAddCircleOutline />
+                          <input
+                          accept="image/*"
+                            onChange={(e) => {
+                              handleChangeValues(
                                 setFieldValue,
                                 "image4",
                                 e.target.files[0]
                               );
-                        }}
-                        id="image4"
-                        type={"file"}
-                        hidden
-                        />
-                    </label>
-                        </IconButton> : <img className={styles.campImage} src={URL.createObjectURL(values?.image4)}/>}     
-
-                   
+                            }}
+                            id="image4"
+                            type={"file"}
+                            hidden
+                          />
+                        </label>
+                      </IconButton>
+                    ) : (
+                      <img
+                        className={styles.campImage}
+                        src={URL.createObjectURL(values?.image4)}
+                      />
+                    )}
+                    <Box className={styles.errorText}>
+                      {errors.image4 && touched.image4 && errors.image4 + "*"}
+                    </Box>
                   </Box>
                 </Box>
               </Box>

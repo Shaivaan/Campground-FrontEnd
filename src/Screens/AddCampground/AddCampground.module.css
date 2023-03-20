@@ -34,6 +34,7 @@
     flex-direction: column;
     align-items: center;
     overflow: hidden;
+    margin-bottom: 20px;
 }
 
 .mainLeft{
@@ -44,9 +45,7 @@
     width: 30%;
     display: flex;
     flex-direction: column;
-    row-gap: 20px;
     align-items: center;
-    justify-content: center;
 }
 
 .locationDiv{
@@ -56,4 +55,10 @@
 .campImage{
     height: 100%;
     width: 100%;
+}
+
+.crossIcon{
+    width: 300px;
+    display: flex;
+    justify-content: end;   
 }
