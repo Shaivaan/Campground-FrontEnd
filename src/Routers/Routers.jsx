@@ -7,22 +7,25 @@ import ForgotPassword from '../Screens/Authentication/ForgotPassword/ForgotPassw
 import  Dashboard  from '../Components/NavbarAndSidebar/Template';
 import { Profile } from '../Screens/Profile/Profile';
 import AddCampground from '../Screens/AddCampground/AddCampground';
+import MyCampground from '../Screens/MyCampground/MyCampground.web';
 
 function Routers() {
   const navigate = useNavigate();
   const location = useLocation();
   const authChecker = ()=>{
     const token = localStorage.getItem("token");
-    if(token){
-      location.pathname == "/login" && location.pathname == "/register" && location.pathname == "/forgotpassword";
-      navigate(-1);
-      // navigate("/login");
-    }
+    const auth = ["/login","/register","/forgotpassword"];
+    token && auth.includes(location.pathname) && navigate("/profile");
+    !token && !auth.includes(location.pathname) && navigate("/login");
   }
 
-  // useEffect(()=>{
-  //   authChecker();
-  // },[location.pathname])
+  const navigator = ()=>{
+
+  }
+
+  useEffect(()=>{
+    authChecker();
+  },[location.pathname])
 
   return (
     <Box>
@@ -33,6 +36,7 @@ function Routers() {
             <Route path='/register' element={<Register/>}/>
             <Route path='/forgotpassword' element={<ForgotPassword/>}/>
             <Route path='/addcampground' element={<Dashboard element={<AddCampground/>}/>}/>
+            <Route path='/myCampground' element={<Dashboard element={<MyCampground/>}/>}/>
         </Routes>
     </Box>
   )

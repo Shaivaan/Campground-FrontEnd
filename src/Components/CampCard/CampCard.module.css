@@ -1,0 +1,48 @@
+.mainCard{
+
+    height: 350px;
+    border-radius: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    overflow: hidden;
+
+}
+
+.cardImage{
+    height: 250px;
+    width: 100%;
+}
+
+.mainCard:hover{
+    cursor: pointer;
+    transition: 0.2s;
+    transform: scale(1.09);
+}
+
+.cardName{
+    font-size: 14px;
+    color: grey;
+    padding: 0px 5px;
+    text-overflow: ellipsis;
+    /* white-space: normal; */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+}
+
+.locationDiv{
+    padding: 10px;
+    font-size: 14px;
+    color: dimgrey;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+.state{
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+   
+}

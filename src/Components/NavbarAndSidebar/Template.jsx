@@ -17,7 +17,7 @@ import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { mainListItems } from './Menu';
+import { MainListItems } from './Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import { useNavigate } from 'react-router-dom';
@@ -131,7 +131,7 @@ function Dashboard({element}) {
             >
               Dashboard
             </Typography>
-            <IconButton size='large' color="inherit">
+            <IconButton onClick={()=>{navigate("/profile")}} size='large' color="inherit">
               <Badge color="secondary">
              <AccountCircleIcon/>
               </Badge>
@@ -158,7 +158,7 @@ function Dashboard({element}) {
           </Toolbar>
           <Divider />
           <List component="nav">
-            {mainListItems}
+            {<MainListItems/>}
             <Divider sx={{ my: 1 }} />
             {/* {secondaryListItems} */}
           </List>

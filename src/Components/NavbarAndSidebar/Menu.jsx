@@ -13,32 +13,39 @@ import WhatshotIcon from '@mui/icons-material/Whatshot';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AddIcon from '@mui/icons-material/Add';
+import { useNavigate } from 'react-router-dom';
 
-export const mainListItems = (
+export const MainListItems = ()=>{
+  const navigate = useNavigate();
+  const handleLogout = ()=>{
+    localStorage.clear();
+    navigate("/login");
+  }
+  return <>
   <React.Fragment>
     <ListItemButton>
       <ListItemIcon>
         <WhatshotIcon />
       </ListItemIcon>
-      <ListItemText primary="My Campgrounds" />
+      <ListItemText primary="My Campgrounds" onClick={()=>{navigate("/myCampground")}}/>
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
         <AddIcon />
       </ListItemIcon>
-      <ListItemText primary="Add Campground" />
+      <ListItemText onClick={()=>{navigate("/addcampground")}} primary="Add Campground" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
         <AccountCircleIcon />
       </ListItemIcon>
-      <ListItemText primary="Profile" />
+      <ListItemText primary="Profile" onClick={()=>{navigate("/profile")}}/>
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
         <LogoutIcon />
       </ListItemIcon>
-      <ListItemText primary="Logout" />
+      <ListItemText primary="Logout" onClick={handleLogout}/>
     </ListItemButton>
  
     {/* <ListItemButton>
@@ -48,7 +55,8 @@ export const mainListItems = (
       <ListItemText primary="Integrations" />
     </ListItemButton> */}
   </React.Fragment>
-);
+  </>
+};
 
 export const secondaryListItems = (
   <React.Fragment>

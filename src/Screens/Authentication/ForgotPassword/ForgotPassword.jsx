@@ -3,11 +3,9 @@ import { Box, TextField, Button, Snackbar, Alert, Slide, IconButton, InputAdornm
 import styles from "../Authentication.module.css";
 import {
   check_otp_api,
-  login_api,
-  logo_image,
+  logo,
   reset_password_api,
   send_opt_api,
-  small_logo,
 } from "../../../assets/assets";
 import {
   forgot_password_schema,
@@ -179,6 +177,7 @@ function ForgotPassword() {
       <Box className={styles.main}>
         <Box className={styles.auth_left}></Box>
         <Box className={styles.auth_right}>
+        <Box className={styles.logoBox}><img className={styles.small_logo} src={logo} /></Box>
           <Formik
             initialValues={
               !otpVisible ? forgot_password_values : forgot_password_otp

@@ -62,3 +62,17 @@
     display: flex;
     justify-content: end;   
 }
+
+.highInpaAndBut{
+    display: flex;
+}
+
+.highDisplay{
+    background-color: lightgrey;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 10px;
+}

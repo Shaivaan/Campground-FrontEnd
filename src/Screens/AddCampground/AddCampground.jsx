@@ -3,17 +3,36 @@ import {
   FormControl,
   IconButton,
   MenuItem,
+  Modal,
   Select,
   TextField,
+  Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { Formik } from "formik";
 import React, { useEffect, useState } from "react";
-import { get_cities_api, get_pincode_lat_lon_api, get_state_api } from "../../assets/assets";
+import { add_campground_api, get_cities_api, get_pincode_lat_lon_api, get_state_api } from "../../assets/assets";
 import { add_campground_initial_values } from "../../assets/formAssets/initialValues";
 import styles from "./AddCampground.module.css";
 import { IoAddCircleOutline, IoCloseOutline } from "react-icons/io5";
 import { add_campground_validation_schema } from "../../assets/formAssets/validationSchema";
+
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+ width: "60%",
+  bgcolor: 'background.paper',
+  overflow:"hidden",
+  borderRadius:"10px",
+  boxShadow: 24,
+  p: 4,
+  maxHeight:"70vh",
+  overflowY:"auto"
+};
+
 
 function AddCampground() {
   const [stateData, setStateData] = useState([]);
@@ -28,7 +47,7 @@ function AddCampground() {
       .then((res) => {
         res.json().then((res) => {
          if(res[0]?.lat && res[0]?.lon){
-          setValue("coordinates",[res[0]?.lat,res[0]?.lon]) 
+          setValue("coordinates",[+res[0]?.lat,+res[0]?.lon]) 
          }
         });
       })
@@ -37,7 +56,25 @@ function AddCampground() {
       });
   }
 
-
+  const addCampground = (data) => {
+    fetch(`${add_campground_api}`,{
+      method:"POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+      body:JSON.stringify(data)
+    }
+    )
+      .then((res) => {
+        res.json().then((res) => {
+          console.log(res);
+        });
+      })
+      .catch((res) => {
+        console.log(res);
+      });
+  };
   
 
   const getState = () => {
@@ -74,7 +111,15 @@ function AddCampground() {
         <Formik
           initialValues={add_campground_initial_values}
           onSubmit={(values) => {
-            console.log(values);
+             const dataToSend = {name:values.name,description:values.description,price:+values.price,highlight:values.highlight,images:[values.image1,values.image2,values.image3,values.image4]};
+            dataToSend["location"] = {
+              city:values.city,
+              address:values.address,
+              state:values.state,
+              pincode:+values.pincode,
+              coordinates: values.coordinates
+            }
+            addCampground(dataToSend);
           }}
           validationSchema={add_campground_validation_schema}
           validateOnChange={true}
@@ -173,14 +218,9 @@ function AddCampground() {
                       </Box>
                     </Box>
                     <Box>
-                      <Box className={styles.label}>Highlight</Box>
+                      <Box className={styles.label}>Highlights</Box>
                       <Box>
-                        <TextField
-                          fullWidth
-                          autoComplete="off"
-                          placeholder="Enter Camground Name"
-                          variant="outlined"
-                        />
+                      <HighLightModal highlights={values.highlight} setFieldValue={setFieldValue}/>
                       </Box>
                     </Box>
                   </Box>
@@ -477,6 +517,39 @@ function AddCampground() {
         </Formik>
       </Box>
     </>
+  );
+}
+
+
+function HighLightModal({setFieldValue,highlights}) {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const [inputValue,setInputValue] = useState("");
+
+  const addHighlight = (value)=>{
+     setFieldValue("highlight",[...highlights,value]);
+     setInputValue("");
+  }
+
+  return (
+    <Box>
+      <Button size="large" variant="contained" fullWidth onClick={handleOpen}>Add Highlights</Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          {highlights.length != 0 && <Box className={styles.highDisplay}>{highlights.map((el,i)=>{return <Box component={"li"}>{highlights[i]}</Box>})}</Box>}
+          <Box className={styles.highInpaAndBut}>
+            <TextField autoComplete={"off"} value={inputValue} onChange={(e)=>{setInputValue(e.target.value)}} style={{flex:3}} placeholder="Add Highlight"/>
+            <Button onClick={()=>{addHighlight(inputValue)}} disabled={inputValue.trim().length == 0} style={{flex:1}} variant="outlined">Add</Button>
+          </Box>
+        </Box>
+      </Modal>
+    </Box>
   );
 }
 

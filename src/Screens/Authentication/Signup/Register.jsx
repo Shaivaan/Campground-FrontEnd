@@ -16,9 +16,8 @@ import {
 } from "@mui/material";
 import styles from "../Authentication.module.css";
 import {
-  logo_image,
+  logo,
   register_api,
-  small_logo,
   snackMessagePosition,
 } from "../../../assets/assets";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
@@ -96,6 +95,7 @@ function Register() {
           {/* <img src={logo_image} className={styles.logo_image} /> */}
         </Box>
         <Box className={styles.auth_right}>
+        <Box className={styles.logoBox}><img className={styles.small_logo} src={logo} /></Box>
           <Formik
             initialValues={register_initial_values}
             onSubmit={(values) => {

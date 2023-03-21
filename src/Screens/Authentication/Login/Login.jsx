@@ -10,7 +10,7 @@ import {
   Slide,
 } from "@mui/material";
 import styles from "../Authentication.module.css";
-import { google_auth, login_api, logo_image, small_logo } from "../../../assets/assets";
+import { google_auth, login_api, logo } from "../../../assets/assets";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { login_validation_schema } from "../../../assets/formAssets/validationSchema";
 import { login_initial_values } from "../../../assets/formAssets/initialValues";
@@ -107,6 +107,7 @@ function Login() {
       <Box className={styles.auth_left}>
       </Box>
       <Box className={styles.auth_right}>
+        <Box className={styles.logoBox}><img className={styles.small_logo} src={logo} /></Box>
         <Formik
           initialValues={login_initial_values}
           onSubmit={(values) => {
