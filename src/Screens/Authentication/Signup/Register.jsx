@@ -305,6 +305,34 @@ function Register() {
                     </RadioGroup>
                   </Box>
 
+                     {values.admin == "admin" &&     <Box>
+                    <Box className={styles.label}>Aadhaar Number</Box>
+                    <Box>
+                      <TextField
+                        onChange={(e) => {
+                          handleChangeValues(
+                            setFieldValue,
+                            "aadhar",
+                            e.target.value.trim()
+                          );
+                        }}
+                        name={"aadhar"}
+                        
+                        autoComplete={"off"}
+                        fullWidth
+                        value={values.aadhar}
+                        size={"small"}
+                        placeholder={"Enter Aadhaar Number"}
+                      />
+                      <Box className={styles.errorText}>
+                        {errors.aadhar &&
+                          touched.aadhar &&
+                          errors.aadhar + "*"}
+                      </Box>
+                    </Box>
+                  </Box>}     
+                
+
                   <Button
                     style={{ marginTop: "15px" }}
                     variant={"contained"}

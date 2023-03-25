@@ -21,6 +21,8 @@ import { MainListItems } from './Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../Footer/Footer';
+import { useSelector } from 'react-redux';
 // import Chart from './Chart';
 // import Deposits from './Deposits';
 // import Orders from './Orders';
@@ -94,20 +96,26 @@ function Dashboard({element}) {
   const toggleDrawer = () => {
     setOpen(!open);
   };
+  const nav_head = useSelector((store)=>{return store.nav_head});
 
   const handleLogout = ()=>{
     localStorage.clear();
     navigate("/login");
   }
 
+  React.useEffect(()=>{
+    console.log(nav_head);
+  })
+
   return (
+    <>
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <AppBar position="absolute" open={open}>
           <Toolbar
             sx={{
-              pr: '24px', // keep right padding when drawer closed
+              pr: '24px', 
             }}
           >
             <IconButton
@@ -129,7 +137,7 @@ function Dashboard({element}) {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+             {nav_head}
             </Typography>
             <IconButton onClick={()=>{navigate("/profile")}} size='large' color="inherit">
               <Badge color="secondary">
@@ -176,13 +184,15 @@ function Dashboard({element}) {
           }}
         >
           <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          <Container maxWidth="lg" sx={{minHeight:"90vh", mt: 4, mb: 4 }}>
             {element}
-           
           </Container>
+      <Footer/>
         </Box>
       </Box>
+
     </ThemeProvider>
+    </>
   );
 }
 

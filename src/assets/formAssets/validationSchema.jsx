@@ -16,6 +16,8 @@ export const register_validation_schema = Yup.object().shape({
   admin: Yup.string().required(),
   first_name: Yup.string().required("First Name is required"),
   last_name: Yup.string().required("Last Name is required"),
+  aadhar: Yup.string().required('Aadhaar number is required')
+    .matches(/^[0-9]{12}$/, 'Aadhaar number must be a 12-digit number'),
 });
 
 export const login_validation_schema = Yup.object().shape({
@@ -82,18 +84,18 @@ export const add_campground_validation_schema = Yup.object().shape({
   //     19.976527363752915,
   //     73.24924504337929
   // ], // latitude then longitude order is importent
-  image1: Yup.mixed()
-  .notOneOf([null], "Image 1 is required")
-  .test("is-correct-file", "Uploaded file is not valid. Only JPEG, PNG files are allowed.", checkIfFilesAreCorrectType),
-  image2:Yup.mixed()
-  .notOneOf([null], "Image 2 is required")
-  .test("is-correct-file", "Uploaded file is not valid. Only JPEG, PNG files are allowed.", checkIfFilesAreCorrectType),
-  image3:Yup.mixed()
-  .notOneOf([null], "Image 3 is required")
-  .test("is-correct-file", "Uploaded file is not valid. Only JPEG, PNG files are allowed.", checkIfFilesAreCorrectType),
-  image4:Yup.mixed()
-  .notOneOf([null], "Image 4 is required")
-  .test("is-correct-file", "Uploaded file is not valid. Only JPEG, PNG files are allowed.", checkIfFilesAreCorrectType)
+  image1: Yup.string()
+    .required("Image link is required")
+    .url("Please enter a valid URL"),
+  image2:Yup.string()
+    .required("Image link is required")
+    .url("Please enter a valid URL"),
+  image3:Yup.string()
+    .required("Image link is required")
+    .url("Please enter a valid URL"),
+  image4:Yup.string()
+    .required("Image link is required")
+    .url("Please enter a valid URL")
 },)
 
 

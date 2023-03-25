@@ -32,9 +32,9 @@ export const Profile = () => {
   };
   const [userData, setUserData] = useState(user_initial_values);
   const [snackBarVisible, setSnackBarVisible] = useState(false);
-  const [isLoading,setLoading] = useState(true);
   const [snackBarMessage, setSnackBarMessage] = useState("");
   const [messageType, setMessageType] = useState("");
+  const [isLoading,setLoading] = useState(true);
   const [stateData, setStateData] = useState([]);
   const [citiesData, setCitiesData] = useState([]);
   const handleEdit = () => {
@@ -139,8 +139,9 @@ export const Profile = () => {
 
   return (
     <>
+    <Box className={styles.add_mIN}>
      <CustomSnackBar snackBarVisible={snackBarVisible} messageType={ messageType} message={snackBarMessage}/>
-    {isLoading ? <Box className={styles.loaderDiv}><CircularProgress/></Box> :  <Box>
+    {isLoading ? <Box className={styles.loaderDiv}><CircularProgress/></Box> :  <Box >
       <Box>
         <Box className={styles.buttonDiv}>
           {!showOrSave ? (
@@ -566,6 +567,8 @@ export const Profile = () => {
         <Box className={styles.profile_right}></Box>
       </Box>
       </Box>  }   
+      </Box>
     </>
+
   );
 };

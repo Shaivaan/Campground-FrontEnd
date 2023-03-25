@@ -21,3 +21,6 @@ export const get_cities_api = `${base_url}/api/v1/stateCity/city`;
 export const update_user_api = `${base_url}/api/v1/user`;
 export const get_pincode_lat_lon_api = (pincode) => `https://nominatim.openstreetmap.org/search?format=json&limit=3&q=${pincode}`;
 export const add_campground_api = `${base_url}/api/v1/camps/newCampGround`;
+export const admin_all_camp_api = `${base_url}/api/v1/camps/admin-campground`;
+export const update_campground_api = `${base_url}/api/v1/camps/campground`;
+export const delete_campground_api = `${base_url}/api/v1/camps/campground`;

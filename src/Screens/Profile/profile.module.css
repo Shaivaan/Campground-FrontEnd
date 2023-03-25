@@ -1,9 +1,12 @@
 .profile_main{
     margin: auto;
     width: 99%;
-    height: 600px;
     display: flex;
     justify-content: space-evenly;
+}
+
+.add_mIN{
+    padding-bottom: 30px;
 }
 
 .name_container{

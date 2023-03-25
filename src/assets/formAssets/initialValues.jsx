@@ -10,13 +10,14 @@ export const register_initial_values = {
 
 export const user_initial_values = {
     phone_number:"",
-    admin:false,
+    admin:true,
     first_name:"",
     last_name:"",
     city:"",
     state:"",
     address:"",
-    pincode:""
+    pincode:"",
+    aadhar:""
 };
 
 export const login_initial_values = {
@@ -48,8 +49,8 @@ export const add_campground_initial_values = {
         pincode: "",
         state: "",
         coordinates: [], // latitude then longitude order is importent
-        image1:null,
-        image2:null,
-        image3:null,
-        image4:null
+        image1:"",
+        image2:"",
+        image3:"",
+        image4:""
 }

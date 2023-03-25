@@ -14,6 +14,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../Footer/Footer';
 
 export const MainListItems = ()=>{
   const navigate = useNavigate();
@@ -23,23 +24,23 @@ export const MainListItems = ()=>{
   }
   return <>
   <React.Fragment>
-    <ListItemButton>
-      <ListItemIcon>
+    <ListItemButton onClick={()=>{navigate("/myCampground")}}>
+      <ListItemIcon >
         <WhatshotIcon />
       </ListItemIcon>
-      <ListItemText primary="My Campgrounds" onClick={()=>{navigate("/myCampground")}}/>
+      <ListItemText primary="My Campgrounds" />
     </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
+    <ListItemButton onClick={()=>{navigate("/addcampground")}}>
+      <ListItemIcon >
         <AddIcon />
       </ListItemIcon>
-      <ListItemText onClick={()=>{navigate("/addcampground")}} primary="Add Campground" />
+      <ListItemText  primary="Add Campground" />
     </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
+    <ListItemButton onClick={()=>{navigate("/profile")}}>
+      <ListItemIcon >
         <AccountCircleIcon />
       </ListItemIcon>
-      <ListItemText primary="Profile" onClick={()=>{navigate("/profile")}}/>
+      <ListItemText primary="Profile" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
