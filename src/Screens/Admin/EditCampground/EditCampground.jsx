@@ -181,7 +181,7 @@ import CustomSnackBar from "../../../Components/Snackbar/Snackbar";
     };
   
     useEffect(() => {
-      console.log(location)  ;
+      console.log(location.state.data)  ;
       getState();
     }, []);
   
@@ -517,7 +517,7 @@ import CustomSnackBar from "../../../Components/Snackbar/Snackbar";
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            {highlights.length != 0 && (
+            {highlights?.length != 0 && (
               <Box className={styles.highDisplay}>
                 {highlights.map((el, i) => {
                   return <Box component={"li"}>{highlights[i]}</Box>;

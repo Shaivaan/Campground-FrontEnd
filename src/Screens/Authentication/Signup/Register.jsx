@@ -78,6 +78,7 @@ function Register() {
       setSnackBarMessage("Registered Succesfully");
       setSnackBarVisible(true);
       localStorage.setItem("token", res.token);
+      localStorage.setItem("isAdmin", res.user.token);
       setTimeout(() => {
         navigate("/");
       }, 2000);
@@ -92,7 +93,6 @@ function Register() {
     <>
       <Box className={styles.main}>
         <Box className={styles.auth_left}>
-          {/* <img src={logo_image} className={styles.logo_image} /> */}
         </Box>
         <Box className={styles.auth_right}>
         <Box className={styles.logoBox}><img className={styles.small_logo} src={logo} /></Box>

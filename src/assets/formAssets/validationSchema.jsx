@@ -16,8 +16,14 @@ export const register_validation_schema = Yup.object().shape({
   admin: Yup.string().required(),
   first_name: Yup.string().required("First Name is required"),
   last_name: Yup.string().required("Last Name is required"),
-  aadhar: Yup.string().required('Aadhaar number is required')
-    .matches(/^[0-9]{12}$/, 'Aadhaar number must be a 12-digit number'),
+  aadhar: Yup.string()
+  .when('admin', {
+    is: 'admin',
+    then: Yup.string()
+      .required('Aadhaar number is required')
+      .matches(/^[0-9]{12}$/, 'Aadhaar number must be a 12-digit number'),
+    otherwise: Yup.string()
+  }),
 });
 
 export const login_validation_schema = Yup.object().shape({

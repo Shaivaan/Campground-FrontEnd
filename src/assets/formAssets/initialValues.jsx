@@ -4,7 +4,8 @@ export const register_initial_values = {
     phone_number:"",
     admin:"user",
     first_name:"",
-    last_name:""
+    last_name:"",
+    aadhar:""
 };
 
 
@@ -17,7 +18,6 @@ export const user_initial_values = {
     state:"",
     address:"",
     pincode:"",
-    aadhar:""
 };
 
 export const login_initial_values = {

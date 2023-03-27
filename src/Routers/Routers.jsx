@@ -11,6 +11,8 @@ import MyCampground from '../Screens/Admin/MyCampground/MyCampground.web';
 import EditCampground from '../Screens/Admin/EditCampground/EditCampground';
 import { useDispatch } from 'react-redux';
 import { addNavData } from '../Redux/action';
+import LandingPage from '../Screens/LandingPage/LandingPage';
+import ExploreCamps from '../Screens/User/ExploreCamps/ExploreCamps';
 
 function Routers() {
   const navigate = useNavigate();
@@ -18,17 +20,25 @@ function Routers() {
   const dispatch = useDispatch();
   const authChecker = ()=>{
     const token = localStorage.getItem("token");
-    const auth = ["/login","/register","/forgotpassword"];
-    token && auth.includes(location.pathname) && navigate("/profile");
-    !token && !auth.includes(location.pathname) && navigate("/login");
+    const isAdmin = localStorage.getItem("isAdmin");
+    if(location.pathname == "/"){
+      console.log(isAdmin);
+      token && isAdmin && navigate("/profile");
+      token && !isAdmin && navigate("/profile");
+    }
+
+    // const auth = ["/login","/register","/forgotpassword"];
+    // token && auth.includes(location.pathname) && navigate("/profile");
+    // !token && !auth.includes(location.pathname) && navigate("/login");
   }
 
 const headset=()=>{
   console.log(location.pathname)
   location.pathname == "/addcampground"  && dispatch(addNavData("Add a Campground"))
+  location.pathname == "/"  && dispatch(addNavData("Camping Cubs"))
   location.pathname == "/profile" && dispatch(addNavData("Profile"))
-  location.pathname == "/" && dispatch(addNavData("Profile"))
   location.pathname == "/myCampground" && dispatch(addNavData("My Campgrounds"))
+  location.pathname == "/user/explore" && dispatch(addNavData("Explore Campgrounds"))
 }
 
   useEffect(()=>{
@@ -39,7 +49,7 @@ const headset=()=>{
   return (
     <Box>
         <Routes>
-            <Route path='/' element={<Dashboard element={<Profile/>}/>}/>
+            <Route path='/' element={<LandingPage/>}/>
             <Route path='/profile' element={<Dashboard element={<Profile/>}/>}/>
             <Route path='/login' element={<Login/>}/>
             <Route path='/register' element={<Register/>}/>
@@ -47,6 +57,7 @@ const headset=()=>{
             <Route path='/addcampground' element={<Dashboard element={<AddCampground/>}/>}/>
             <Route path='/myCampground' element={<Dashboard element={<MyCampground/>}/>}/>
             <Route path='/editCampground' element={<Dashboard element={<EditCampground/>}/>}/>
+            <Route path='/user/explore' element={<Dashboard element={<ExploreCamps/>}/>}/>
         </Routes>
     </Box>
   )

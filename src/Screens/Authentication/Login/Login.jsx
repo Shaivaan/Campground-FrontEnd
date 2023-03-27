@@ -87,6 +87,7 @@ function Login() {
       setSnackBarMessage("Login Successfully");
       setSnackBarVisible(true);
       localStorage.setItem("token",res.token);
+      localStorage.setItem("isAdmin",res.user.admin);
       setTimeout(() => {
         navigate("/");
       }, 2000);

@@ -61,31 +61,14 @@
     padding-right: 15px;
 }
 
-.fav{
-    z-index: 1;
-    margin-top: -340px;
-    margin-left: 10px;
-    font-size: 30px;
+.greyText{
+    color: grey;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.dummyName{
     font-weight: bold;
-    background-color: black;
-    
-}
-
-.favIcoBack{
-    background-color: rgb(213, 224, 221);
-    border-radius: 10px;
-    opacity: 0.4;
-}
-
-.addedfavIcoBack{
-    background-color: rgb(213, 224, 221);
-    border-radius: 10px;
-    opacity: 0.4;
-    color: darkgreen;
-}
-
-.favIcoBack:hover,.addedfavIcoBack:hover{
-    scale: 1.5;
-    transition: all 0.3s;
-    opacity: 1;
+    margin-left: 20px;
+    margin-top: 10px;
 }

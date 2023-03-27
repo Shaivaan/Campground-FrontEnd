@@ -24,3 +24,4 @@ export const add_campground_api = `${base_url}/api/v1/camps/newCampGround`;
 export const admin_all_camp_api = `${base_url}/api/v1/camps/admin-campground`;
 export const update_campground_api = `${base_url}/api/v1/camps/campground`;
 export const delete_campground_api = `${base_url}/api/v1/camps/campground`;
+export const explore_campgrounds_api = `${base_url}/api/v1/utils/filters`;
