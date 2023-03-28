@@ -34,6 +34,7 @@ function CampCard({cardData}) {
 
   const handleEditNaivate = () =>{
     localStorage.getItem("isAdmin") == "true" && navigate("/editCampground",{state:{data:cardData}});
+    localStorage.getItem("isAdmin") == "false" && navigate("/user/seeCampground",{state:{data:cardData}});
   }
 
 

@@ -13,6 +13,7 @@ import { useDispatch } from 'react-redux';
 import { addNavData } from '../Redux/action';
 import LandingPage from '../Screens/LandingPage/LandingPage';
 import ExploreCamps from '../Screens/User/ExploreCamps/ExploreCamps';
+import SeeCampground from '../Screens/User/SeeCampground/SeeCampground';
 
 function Routers() {
   const navigate = useNavigate();
@@ -58,6 +59,7 @@ const headset=()=>{
             <Route path='/myCampground' element={<Dashboard element={<MyCampground/>}/>}/>
             <Route path='/editCampground' element={<Dashboard element={<EditCampground/>}/>}/>
             <Route path='/user/explore' element={<Dashboard element={<ExploreCamps/>}/>}/>
+            <Route path='/user/seeCampground' element={<Dashboard element={<SeeCampground/>}/>}/>
         </Routes>
     </Box>
   )

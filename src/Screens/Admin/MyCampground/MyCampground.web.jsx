@@ -26,14 +26,14 @@ function MyCampground() {
           res.json().then((res) => {
             res.length !== 0 && setCampgroundData([...res]);
             console.log(res);
+          }) .finally((res)=>{
+            setLoading(false);
           });
         })
         .catch((res) => {
           console.log(res);
         })
-        .finally((res)=>{
-          setLoading(false);
-        })
+       
         ;
   
     };
