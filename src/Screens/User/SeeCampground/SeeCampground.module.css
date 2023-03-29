@@ -47,3 +47,48 @@
 .descText{
     font-size: 19px;
 }
+
+.pricee{
+    font-weight: bold;
+    margin: 40px 0px;
+    font-size: 22px;
+}
+
+.book{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.formCont{
+    width: 100%;
+    border-radius: 10px;
+    margin: 15px 0px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 20px;
+}
+
+.errorText{
+    color: red;
+    margin: 5px 0px;
+    font-size: 12px;
+}
+
+.label{
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 15px;
+}
+
+.flex3{
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    column-gap: 15px;
+}

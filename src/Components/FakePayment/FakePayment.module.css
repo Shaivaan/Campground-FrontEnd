@@ -1,0 +1,44 @@
+.cardMain{
+    border-radius: 10px;
+    width: 60%;
+    margin: auto;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 10px 20px;
+}
+
+.flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 15px;
+}
+
+.label{
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+
+.errorText{
+    color: red;
+    margin: 5px 0px;
+    font-size: 12px;
+}
+
+.price{
+    font-weight: bold;
+    font-size: 20px;
+    text-align: right;
+   margin: 10px 0px;
+    width: 60%;
+    margin: auto;
+}
+
+.payment{
+    display: flex;
+    justify-content: center;
+}
+
+.master{
+   color: red;
+}

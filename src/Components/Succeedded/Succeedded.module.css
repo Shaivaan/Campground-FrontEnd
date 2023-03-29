@@ -1,0 +1,16 @@
+.mainCheck{
+    margin: auto;
+    width: 50%;
+    text-align: center;
+}
+
+.tick{
+    color: green;
+    font-size: 200px;
+    text-align: center;
+}
+
+.succ{
+    font-style: bold;
+    font-size: 20px;
+}

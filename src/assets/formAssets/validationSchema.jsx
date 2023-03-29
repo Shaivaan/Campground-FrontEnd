@@ -115,3 +115,31 @@ function checkIfFilesAreCorrectType(files){
   }
   return valid;
 }
+
+
+export const person_campground_book_validation = Yup.object().shape({
+  name:Yup.string().required().label("Name"),
+  phoneNumber: Yup.string()
+    .required('Phone number is required')
+    .matches(/^\d{10}$/, 'Phone number must be exactly 10 digits'),
+  age: Yup.number()
+    .required('Age is required')
+    .min(15, 'Age must be at least 15 years old'),
+  govId: Yup.string()
+    .required('Government ID is required')
+    .matches(/^\d{12}$/, 'Government ID must be exactly 12 digits'),  
+});
+
+
+export const fakepaymentSchema = Yup.object().shape({
+  owner: Yup.string().required("Owner name is required"),
+  cardNumber: Yup.string()
+    .matches(/^\d{4}-\d{4}-\d{4}-\d{4}$/, "Card number must be in the format of 'xxxx-xxxx-xxxx-xxxx'")
+    .required("Card number is required"),
+  cvv: Yup.string()
+    .matches(/^\d{3}$/, "CVV must be a 3-digit number")
+    .required("CVV is required"),
+    expiry: Yup
+    .string()
+    .required('Expiry month is required')
+});
