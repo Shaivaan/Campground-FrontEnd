@@ -56,4 +56,5 @@ function DetailsCard({data,setDetailstoAdd,detailstoAdd}) {
   )
 }
 
+
 export default DetailsCard

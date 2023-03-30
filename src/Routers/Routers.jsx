@@ -14,6 +14,8 @@ import { addNavData } from '../Redux/action';
 import LandingPage from '../Screens/LandingPage/LandingPage';
 import ExploreCamps from '../Screens/User/ExploreCamps/ExploreCamps';
 import SeeCampground from '../Screens/User/SeeCampground/SeeCampground';
+import Wishlist from '../Screens/User/Wishlist/Wishlist';
+import Booking from '../Screens/User/Booking/Booking';
 
 function Routers() {
   const navigate = useNavigate();
@@ -35,11 +37,13 @@ function Routers() {
 
 const headset=()=>{
   console.log(location.pathname)
-  location.pathname == "/addcampground"  && dispatch(addNavData("Add a Campground"))
-  location.pathname == "/"  && dispatch(addNavData("Camping Cubs"))
-  location.pathname == "/profile" && dispatch(addNavData("Profile"))
-  location.pathname == "/myCampground" && dispatch(addNavData("My Campgrounds"))
-  location.pathname == "/user/explore" && dispatch(addNavData("Explore Campgrounds"))
+  location.pathname == "/addcampground"  && dispatch(addNavData("Add a Campground"));
+  location.pathname == "/"  && dispatch(addNavData("Camping Cubs"));
+  location.pathname == "/profile" && dispatch(addNavData("Profile"));
+  location.pathname == "/myCampground" && dispatch(addNavData("My Campgrounds"));
+  location.pathname == "/user/explore" && dispatch(addNavData("Explore Campgrounds"));
+  location.pathname == "/user/wishlist" && dispatch(addNavData("Wishlist"));
+  location.pathname == "/user/booking" && dispatch(addNavData("Your Booking"));
 }
 
   useEffect(()=>{
@@ -60,6 +64,8 @@ const headset=()=>{
             <Route path='/editCampground' element={<Dashboard element={<EditCampground/>}/>}/>
             <Route path='/user/explore' element={<Dashboard element={<ExploreCamps/>}/>}/>
             <Route path='/user/seeCampground' element={<Dashboard element={<SeeCampground/>}/>}/>
+            <Route path='/user/wishlist' element={<Dashboard element={<Wishlist/>}/>}/>
+            <Route path='/user/booking' element={<Dashboard element={<Booking/>}/>}/>
         </Routes>
     </Box>
   )

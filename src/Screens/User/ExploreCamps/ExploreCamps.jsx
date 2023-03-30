@@ -1,5 +1,6 @@
 import {
   Button,
+  Chip,
   CircularProgress,
   FormControl,
   IconButton,
@@ -17,10 +18,13 @@ import CampCard from "../../../Components/CampCard/CampCard";
 import styles from "./ExploreCamps.module.css";
 import { FiFilter } from "react-icons/fi";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import { useGeolocated } from "react-geolocated";
 let interval;
 const debouncingTime = 700;
 
 function ExploreCamps() {
+
+
   const [filter, setFilter] = useState({
     filters: {
       maxPrice: 15000,
@@ -31,17 +35,28 @@ function ExploreCamps() {
       overallRating: "no",
       price: "no",
       visitCount: "no",
+      latitude: "",
+      longitude:"",
+      distance:"no"
     },
     query: "",
   });
 
   const [campgroundData, setCampgroundData] = useState([]);
   const [loader, setLoader] = useState(true);
+  const { coords, isGeolocationAvailable, isGeolocationEnabled } =
+  useGeolocated({
+      positionOptions: {
+          enableHighAccuracy: false,
+      },
+      userDecisionTimeout: 5000,
+  });
+
 
   useEffect(() => {
     getUserCampgrounds();
   }, []);
-
+  
   useEffect(() => {
     debouncer();
   }, [filter.query]);
@@ -110,6 +125,7 @@ function ExploreCamps() {
               value={filter}
               filter={filter.filters}
               setFilter={setFilter}
+              geolocation= {{coords,isGeolocationAvailable,isGeolocationEnabled}}
             />
           </Box>
         </Box>
@@ -121,7 +137,7 @@ function ExploreCamps() {
           ) : campgroundData.length != 0 ? (
             <Box className={styles.allCampground}>
               {campgroundData.map((el, i) => (
-                <CampCard cardData={el} key={i} />
+                <CampCard cardData={el} campgroundData={campgroundData} setCampgroundData={setCampgroundData} key={i} />
               ))}
             </Box>
           ) : (
@@ -135,7 +151,7 @@ function ExploreCamps() {
   );
 }
 
-const FilterPopover = ({ filter, setFilter, value,getCamps }) => {
+const FilterPopover = ({ filter, setFilter, value,getCamps,geolocation }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [rentals, setRentals] = useState(JSON.stringify(["cottage", "tent"]));
 
@@ -152,9 +168,12 @@ const FilterPopover = ({ filter, setFilter, value,getCamps }) => {
     getCamps();
   }
 
+  useEffect(()=>{
+    geolocation.coords && setFilter({...value,filters:{...value.filters,longitude:geolocation.coords.longitude,latitude:geolocation.coords.latitude}})
+  },[geolocation.coords])
+
 
   const handleChange = (e) => {
-    console.log(e);
     e.target.id &&
       setFilter({
         ...value,
@@ -167,7 +186,6 @@ const FilterPopover = ({ filter, setFilter, value,getCamps }) => {
         filters: { ...value.filters, [e.target.name]: e.target.value },
       });
 
-
     if (e.target.name == "rentals") {
       setRentals(e.target.value);
       setFilter({
@@ -178,6 +196,10 @@ const FilterPopover = ({ filter, setFilter, value,getCamps }) => {
         },
       });
     }
+
+    // e.target.name == "distance" && setFilter({...value,filters:{...value.filters,longitude:geolocation.coords.longitude,latitude:geolocation.coords.latitude}});
+
+
   };
 
   const open = Boolean(anchorEl);
@@ -359,6 +381,30 @@ const FilterPopover = ({ filter, setFilter, value,getCamps }) => {
                   <MenuItem value={-1}>High To Low</MenuItem>
                 </Select>
               </FormControl>
+            </Box>
+
+            <Box>
+           
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">
+                  Sort by Distance
+                </InputLabel>
+                <Select
+                  size="small"
+                  labelId="demo-simple-select-label"
+                  id="distance"
+                  name="distance"
+                  value={filter.distance}
+                  label="Sort by Distance"
+                  disabled={!geolocation.isGeolocationEnabled}
+                  onChange={handleChange}
+                >
+                  <MenuItem value={"no"}>None</MenuItem>
+                  <MenuItem value={1}>Low To High</MenuItem>
+                  <MenuItem value={-1}>High To Low</MenuItem>
+                </Select>
+              </FormControl>
+              {!geolocation.isGeolocationEnabled && <Chip label="Enable Location to sort by your distance !" variant="filled" /> } 
             </Box>
 
             <Box className={styles.price}>

@@ -27,3 +27,6 @@ export const delete_campground_api = `${base_url}/api/v1/camps/campground`;
 export const explore_campgrounds_api = `${base_url}/api/v1/utils/filters`;
 export const send_booking_details_api = `${base_url}/api/v1/buySlots/addItem`;
 export const fake_payment_api = `${base_url}/api/v1/paid/successfully`;
+export const add_remove_wishlist_api = (campId)=> `${base_url}/api/v1/wishlist/${campId}`;
+export const get_all_wishlist_api = `${base_url}/api/v1/wishlist`;
+export const get_all_bokked_trips = `${base_url}/api/v1/paid/upcomingTrips`;

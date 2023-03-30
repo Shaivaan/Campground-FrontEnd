@@ -3,21 +3,16 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import PeopleIcon from "@mui/icons-material/People";
-import BarChartIcon from "@mui/icons-material/BarChart";
-import LayersIcon from "@mui/icons-material/Layers";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import LogoutIcon from "@mui/icons-material/Logout";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
-import Footer from "../Footer/Footer";
 import { GiCampfire } from "react-icons/gi";
 import { BsClipboardHeart } from "react-icons/bs";
-import {SlCalender} from 'react-icons/sl'
+import {SlCalender} from 'react-icons/sl';
+import {MdAccountCircle} from "react-icons/md";
+import {RiLogoutBoxRLine} from "react-icons/ri";
+import styles from "./Menu.module.css";
 
 export const MainListItems = () => {
   const navigate = useNavigate();
@@ -69,27 +64,27 @@ export const MainListItems = () => {
               }}
             >
               <ListItemIcon>
-                <GiCampfire />
+                <GiCampfire className={styles.icon}/>
               </ListItemIcon>
               <ListItemText primary="Explore Camps" />
             </ListItemButton>
             <ListItemButton
               onClick={() => {
-                navigate("/");
+                navigate("/user/wishlist");
               }}
             >
               <ListItemIcon>
-                <BsClipboardHeart />
+                <BsClipboardHeart className={styles.icon}/>
               </ListItemIcon>
               <ListItemText primary="Wishlist" />
             </ListItemButton>
             <ListItemButton
               onClick={() => {
-                navigate("/");
+                navigate("/user/booking");
               }}
             >
               <ListItemIcon>
-                <SlCalender />
+                <SlCalender className={styles.icon}/>
               </ListItemIcon>
               <ListItemText primary="Bookings" />
             </ListItemButton>
@@ -102,13 +97,13 @@ export const MainListItems = () => {
           }}
         >
           <ListItemIcon>
-            <AccountCircleIcon />
+            <MdAccountCircle className={styles.icon}/>
           </ListItemIcon>
           <ListItemText primary="Profile" />
         </ListItemButton>
         <ListItemButton>
           <ListItemIcon>
-            <LogoutIcon />
+            <RiLogoutBoxRLine className={styles.icon}/>
           </ListItemIcon>
           <ListItemText primary="Logout" />
         </ListItemButton>

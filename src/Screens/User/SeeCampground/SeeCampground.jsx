@@ -246,7 +246,7 @@ function HorizontalLinearStepper({campId,price}) {
     })
       .then((res) => {
         res.json().then((res) => {
-          res.details && setPriceData({people:res.details.length,price:price,days:1,cartId:res._id})
+          res.details && setPriceData({people:res.details.length,price:price,days:res.days,cartId:res._id})
           setActiveStep(1);
         })
         .finally((res)=>{
