@@ -89,3 +89,9 @@
     transition: all 0.3s;
     opacity: 1;
 }
+
+.abcd{
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 10px;
+}

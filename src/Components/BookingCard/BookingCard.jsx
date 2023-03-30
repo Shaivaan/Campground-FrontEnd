@@ -9,6 +9,8 @@ import { SlCalender } from "react-icons/sl";
 import moment from "moment/moment";
 import { IoPeopleOutline } from "react-icons/io5";
 import AliceCarousel from "react-alice-carousel";
+import StarRating from "../Ratings/Rating";
+
 
 const style = {
     position: 'absolute',
@@ -24,7 +26,7 @@ const style = {
     overflowY:"scroll",
   };
 
-function BookingCard({ cardData, data }) {
+function BookingCard({ cardData, data ,bookingType}) {
   const navigate = useNavigate();
   const [isModalOpen,setIsModalOpen] = useState(false);
   const [activeImage, setActiveImage] = useState(0);
@@ -69,7 +71,7 @@ function BookingCard({ cardData, data }) {
 
   return (
     <>
-      <CampModal modalData={data} open={isModalOpen} handleOpen={handleOpen} handleClose={handleClose}/>
+      <CampModal modalData={data} bookingType={bookingType} open={isModalOpen} handleOpen={handleOpen} handleClose={handleClose}/>
       <CustomSnackBar
         snackBarVisible={snackBarVisible}
         message={snackBarMessage}
@@ -128,7 +130,7 @@ function BookingCard({ cardData, data }) {
   );
 }
 
-function CampModal({open,handleClose,modalData}) {
+function CampModal({open,handleClose,modalData,bookingType}) {
     const handleDragStart = (e) => e.preventDefault();
     const responsive = {
         0: { items: 1 },
@@ -188,8 +190,8 @@ function CampModal({open,handleClose,modalData}) {
           items={items}
           />
           </Box>
-
-
+        
+            
            <Box className={styles.modalMain}>
                 <Box>
                     <Box className={styles.label}>Campground Name</Box>
@@ -199,13 +201,17 @@ function CampModal({open,handleClose,modalData}) {
                 <Box>
                 <Box className={styles.label}>Location</Box>
                 <Box>
-                    <Box component={"span"}>{modalData.campId.location.city}</Box>
+                    <Box component={"span"}>{modalData.campId.location.city + ", "}</Box>
                     <Box component={"span"}>{modalData.campId.location.state}</Box>
                 </Box>
                 </Box>
                 <Box>
                 <Box className={styles.label}>Address</Box>
                 <Box>{modalData.campId.location.address}</Box>
+                </Box>
+                <Box>
+                <Box className={styles.label}>Price</Box>
+                <Box>₹ {modalData.campId.price * modalData.details.length * moment(modalData.dates[1]).diff(moment(modalData.dates[0]), 'days')}</Box>
                 </Box>
 
                 <Box>
@@ -240,6 +246,7 @@ function CampModal({open,handleClose,modalData}) {
         </TableBody>
       </Table>
     </TableContainer>
+    {bookingType && bookingType === "previousTrips" && <StarRating campId={modalData.campId._id}/>}
                 </Box>
            </Box>
           </Box>

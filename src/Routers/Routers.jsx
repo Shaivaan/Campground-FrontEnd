@@ -26,7 +26,7 @@ function Routers() {
     const isAdmin = localStorage.getItem("isAdmin");
     if(location.pathname == "/"){
       console.log(isAdmin);
-      token && isAdmin && navigate("/profile");
+      token && isAdmin && navigate("/user/explore");
       token && !isAdmin && navigate("/profile");
     }
 

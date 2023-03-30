@@ -63,13 +63,13 @@ function Booking() {
             aria-label="Platform"
           >
             <ToggleButton color="info" value="upcomingTrips">
-              Future Bookings
+              Upcoming Trips ({campgroundData["upcomingTrips"]?.length})
             </ToggleButton>
             <ToggleButton color="info" value="currentTrip">
-              Current Bookings
+              Current Trips ({campgroundData["currentTrip"]?.length})
             </ToggleButton>
             <ToggleButton color="info" value="previousTrips">
-              Previous Booking
+              Previous Trips ({campgroundData["previousTrips"]?.length})
             </ToggleButton>
           </ToggleButtonGroup>
 
@@ -78,7 +78,7 @@ function Booking() {
           <Box className={campgroundData[alignment]?.length != 0 ? styles.allCampground:styles.loadingContainer}>
             {campgroundData[alignment]?.length != 0 ? (
               campgroundData[alignment]?.map((el) => {
-                return <BookingCard cardData={el.campId} data={el} />;
+                return <BookingCard bookingType={alignment} cardData={el.campId} data={el} />;
               })
             ) : (
               <Box>
@@ -91,5 +91,6 @@ function Booking() {
     </Box>
   );
 }
+
 
 export default Booking;

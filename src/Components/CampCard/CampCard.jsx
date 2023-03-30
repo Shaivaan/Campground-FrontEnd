@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Rating } from '@mui/material';
 import React, { useEffect, useRef, useState } from 'react'
 import styles from "./CampCard.module.css";
 import {GoLocation} from "react-icons/go"
@@ -92,7 +92,8 @@ function CampCard({cardData,setCampgroundData,campgroundData}) {
     <CustomSnackBar snackBarVisible={snackBarVisible} message={snackBarMessage} messageType={messageType}/>
     <Box onMouseEnter={mouseIn} onMouseOut={mouseOut}  className = {styles.mainCard} onClick={handleEditNaivate}>
         <Box><img className = {styles.cardImage} src={cardData.images[activeImage]}/></Box>
-        <Box className = {styles.recomm}>{ cardData.recommendation  ? "Recommended" : "‎ " }</Box>
+        <Box className = {styles.abcd}>        <Rating name="read-only" value={cardData.overallRating} readOnly />
+<Box className = {styles.recomm}> { cardData.recommendation  ? "Recommended" : "‎ " }</Box></Box>
         <Box className = {styles.cardName}>{cardData.name}</Box>
         <Box className = {styles.locationDiv}>
           <Box className = {styles.state}><GoLocation/><Box className = {styles.statName}>{cardData.location.city}, {cardData.location.state}</Box></Box>

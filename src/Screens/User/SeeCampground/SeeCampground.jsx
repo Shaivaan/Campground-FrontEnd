@@ -12,6 +12,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import {
+  Avatar,
   Button,
   FormControl,
   IconButton,
@@ -19,6 +20,7 @@ import {
   LinearProgress,
   MenuItem,
   Modal,
+  Rating,
   Select,
   Step,
   StepLabel,
@@ -118,6 +120,10 @@ function SeeCampground() {
       {data.recommendation && (
         <Box className={styles.recom}>100% Recommended</Box>
       )}
+
+      <Box><Rating name="read-only" value={data.overallRating} readOnly /></Box> 
+      <Box component={"h3"}>Campground Visited: {data.visitCount}</Box> 
+
       <Box className={styles.book}>
         <Box className={styles.pricee}>Price: ₹{data.price}</Box>
         <BookModal price={data.price} campId={data._id}/>
@@ -138,6 +144,17 @@ function SeeCampground() {
           </ol>
         </Box>
       </Box>
+       {data.ratings.length != 0 && <Box component={"h3"}>Review and Ratings</Box>}
+      { data.ratings.length != 0 && data.ratings.map((el)=>{
+       return <Box className={styles.review}>
+          <Box className={styles.rate}>
+           <Avatar style={{width:"30px",height:"30px"}}/>
+            <Box>{el.userName}</Box>
+          </Box>
+          <Box><Rating name="read-only" value={el.rate} readOnly /></Box>
+          <Box >{el.review}</Box>
+        </Box>
+      })}
     </>
   );
 }

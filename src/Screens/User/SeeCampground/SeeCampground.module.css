@@ -92,3 +92,14 @@
     align-items: end;
     column-gap: 15px;
 }
+.rate{
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.review{
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 20px;
+}

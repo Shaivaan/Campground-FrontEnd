@@ -1,0 +1,36 @@
+.star-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .star {
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+    transition: transform 0.2s;
+    filter: grayscale(100%);
+  }
+  
+  .star.active {
+    font-size: 30px;
+    color: #ffcc33;
+    transform: scale(1.2);
+    filter: grayscale(0%);
+  }
+  
+  .star.hovered {
+    filter: grayscale(0%);
+  }
+  
+  .rating-label {
+    margin-top: 8px;
+    font-size: 16px;
+    text-align: center;
+    color: #666;
+  }
+
+  .textf{
+    display: flex;
+  }
