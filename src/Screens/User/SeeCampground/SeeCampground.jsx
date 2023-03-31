@@ -166,9 +166,9 @@ export const BookModal = ({campId,price}) => {
 
   return (
     <div>
-      <Button variant={"contained"} onClick={handleOpen}>
+      {localStorage.getItem("isAdmin") !== "true" && <Button variant={"contained"} onClick={handleOpen}>
         Book Now
-      </Button>
+      </Button>}
       <Modal
         open={open}
         aria-labelledby="modal-modal-title"

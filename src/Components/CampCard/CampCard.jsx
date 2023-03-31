@@ -7,7 +7,7 @@ import {AiOutlineHeart,AiFillHeart} from "react-icons/ai";
 import { add_remove_wishlist_api } from '../../assets/assets';
 import CustomSnackBar from '../Snackbar/Snackbar';
 
-function CampCard({cardData,setCampgroundData,campgroundData}) {
+function CampCard({cardData,setCampgroundData,campgroundData,visitor}) {
   
   const navigate = useNavigate();
   const location = useLocation();
@@ -39,8 +39,8 @@ function CampCard({cardData,setCampgroundData,campgroundData}) {
   };
 
   const handleEditNaivate = () =>{
-    localStorage.getItem("isAdmin") == "true" && navigate("/editCampground",{state:{data:cardData}});
-    localStorage.getItem("isAdmin") == "false" && navigate("/user/seeCampground",{state:{data:cardData}});
+    visitor == "true" && navigate("/editCampground",{state:{data:cardData}});
+    visitor == "false" && navigate("/user/seeCampground",{state:{data:cardData}});
   }
 
 
@@ -99,7 +99,7 @@ function CampCard({cardData,setCampgroundData,campgroundData}) {
           <Box className = {styles.state}><GoLocation/><Box className = {styles.statName}>{cardData.location.city}, {cardData.location.state}</Box></Box>
           <Box>₹ {cardData.price}</Box>
         </Box>
-        {cardData.wishlist !== undefined && <Box onClick={addRemoveCampground} className = {styles.fav}>{!cardData.wishlist ?<AiOutlineHeart  className={styles.favIcoBack}/>: <AiFillHeart className={styles.addedfavIcoBack}/>}</Box>}
+        {localStorage.getItem("isAdmin") !== "true" && cardData.wishlist !== undefined && <Box onClick={addRemoveCampground} className = {styles.fav}>{!cardData.wishlist ?<AiOutlineHeart  className={styles.favIcoBack}/>: <AiFillHeart className={styles.addedfavIcoBack}/>}</Box>}
     </Box>
     </>
   )

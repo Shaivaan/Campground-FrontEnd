@@ -352,6 +352,7 @@ function Register() {
       </Box>
       <Box className={styles.parallel}>
         {" "}
+      </Box>
         <Snackbar
           TransitionComponent={TransitionRight}
           open={snackBarVisible}
@@ -367,7 +368,6 @@ function Register() {
             {snackBarMessage}
           </Alert>
         </Snackbar>
-      </Box>
     </>
   );
 }

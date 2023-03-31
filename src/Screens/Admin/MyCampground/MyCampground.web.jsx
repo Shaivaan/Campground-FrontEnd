@@ -41,7 +41,7 @@ function MyCampground() {
 
   return (
     <Box>
-      {loader ? <Box className = {styles.loadingContainer}><CircularProgress/></Box> :  campgroundData.length != 0 ? <Box className = {styles.allCampground}>{campgroundData.map((el,i)=><CampCard cardData={el} key={i}/>)}</Box> : <Box className = {styles.loadingContainer}><Box>No Added Campground</Box><Button onClick={()=>{navigate("/addcampground")}} variant={'outlined'}>Add Campground</Button></Box>}
+      {loader ? <Box className = {styles.loadingContainer}><CircularProgress/></Box> :  campgroundData.length != 0 ? <Box className = {styles.allCampground}>{campgroundData.map((el,i)=><CampCard visitor={"true"} cardData={el} key={i}/>)}</Box> : <Box className = {styles.loadingContainer}><Box>No Added Campground</Box><Button onClick={()=>{navigate("/addcampground")}} variant={'outlined'}>Add Campground</Button></Box>}
       
     </Box>
   )

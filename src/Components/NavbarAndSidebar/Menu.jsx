@@ -33,6 +33,7 @@ export const MainListItems = () => {
       <React.Fragment>
         {isAdmin() && (
           <>
+          
             <ListItemButton
               onClick={() => {
                 navigate("/myCampground");
@@ -42,6 +43,16 @@ export const MainListItems = () => {
                 <WhatshotIcon />
               </ListItemIcon>
               <ListItemText primary="My Campgrounds" />
+            </ListItemButton>
+            <ListItemButton
+              onClick={() => {
+                navigate("/user/explore");
+              }}
+            >
+              <ListItemIcon>
+                <GiCampfire className={styles.icon}/>
+              </ListItemIcon>
+              <ListItemText primary="Explore Camps" />
             </ListItemButton>
             <ListItemButton
               onClick={() => {

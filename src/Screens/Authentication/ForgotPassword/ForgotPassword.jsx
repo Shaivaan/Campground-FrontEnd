@@ -371,6 +371,7 @@ function ForgotPassword() {
           </Alert>
         </Snackbar>
 
+      </Box>
         <Snackbar
           // TransitionComponent={TransitionRight}
           open={otpVisible && !resetPassword}
@@ -386,7 +387,6 @@ function ForgotPassword() {
             {`00 : ` + otpTimer + ` seconds`}
           </Alert>
         </Snackbar>
-      </Box>
     </>
   );
 }

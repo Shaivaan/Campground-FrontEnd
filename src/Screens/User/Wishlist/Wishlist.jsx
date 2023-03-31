@@ -48,7 +48,7 @@ function Wishlist() {
     ) : campgroundData.length != 0 ? (
       <Box className={styles.allCampground}>
         {campgroundData.map((el, i) => (
-          <CampCard cardData={el} campgroundData={campgroundData} setCampgroundData={setCampgroundData} key={i} />
+          <CampCard cardData={el} visitor={"false"} campgroundData={campgroundData} setCampgroundData={setCampgroundData} key={i} />
         ))}
       </Box>
     ) : (

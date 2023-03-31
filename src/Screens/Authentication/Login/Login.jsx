@@ -18,9 +18,10 @@ import { Formik } from "formik";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import { GoogleLogin } from 'react-google-login';
+import { gapi } from "gapi-script";
 
 function Login() {
-  const clientId = '532654142650-g2dd03hso45lf4ev3p692lpnk6j0giet.apps.googleusercontent.com';
+  const clientId = '242039989369-5kkbaclujoumai4lmsttbo7dq12tslmq.apps.googleusercontent.com';
   const [showPassword, setShowPassword] = useState("password");
   const navigate = useNavigate();
   const [snackBarVisible, setSnackBarVisible] = useState(false);
@@ -47,15 +48,22 @@ function Login() {
     console.error(error);
   };
 
+
+
   const LoginButton=()=>{
-    return  <GoogleLogin
+    return     <GoogleLogin
+    render={(renderProp) => {
+      return (
+        <Button variant={"outlined"} fullWidth onClick={renderProp.onClick} disabled={renderProp.disabled}>
+        <FcGoogle className={styles.googleIcon} />
+        Login With Google
+      </Button>
+      );
+    }}
     clientId={clientId}
     buttonText="Login with Google"
     onSuccess={onSuccess}
-    onFailure={onFailure}
-    cookiePolicy={'single_host_origin'}
-    uxMode={'redirect'}
-  />
+    onFailure={onFailure}/>
   }
 
   const handleLogin = (data) => {
@@ -99,7 +107,7 @@ function Login() {
   };
 
   const handleGoogleAuth = ()=>{
-  // window.location.href = "http://localhost:3000/auth/google";
+  window.location.href = "http://camp-ground-csyy.onrender.com/auth/google";
   }
 
   return (
@@ -213,11 +221,8 @@ function Login() {
                   Submit
                 </Button>
                 <Box className={styles.centerAlign}>OR</Box>
-                <Button variant={"outlined"} fullWidth onClick={handleGoogleAuth}>
-                  <FcGoogle className={styles.googleIcon} />
-                  Login With Google
-                </Button>
-                {/* <LoginButton/> */}
+               
+                <LoginButton/>
                 <Box className={styles.centerAlign}>
                   Need an account? <Link to={"/register"}>Register</Link>
                 </Box>
@@ -228,7 +233,9 @@ function Login() {
       </Box>
     
     </Box>
-    <Box className = {styles.parallel}>  <Snackbar
+    <Box className = {styles.parallel}> </Box>
+    <Snackbar
+     style={{zIndex:3}}
         TransitionComponent={TransitionRight}
         open={snackBarVisible}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
@@ -242,7 +249,7 @@ function Login() {
         >
           {snackBarMessage}
         </Alert>
-      </Snackbar></Box>
+      </Snackbar>
     </>
   );
 }

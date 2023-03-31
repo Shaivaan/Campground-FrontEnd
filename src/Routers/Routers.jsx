@@ -16,6 +16,7 @@ import ExploreCamps from '../Screens/User/ExploreCamps/ExploreCamps';
 import SeeCampground from '../Screens/User/SeeCampground/SeeCampground';
 import Wishlist from '../Screens/User/Wishlist/Wishlist';
 import Booking from '../Screens/User/Booking/Booking';
+import { gapi } from 'gapi-script';
 
 function Routers() {
   const navigate = useNavigate();
@@ -26,11 +27,12 @@ function Routers() {
     const isAdmin = localStorage.getItem("isAdmin");
     if(location.pathname == "/"){
       console.log(isAdmin);
-      token && isAdmin && navigate("/user/explore");
-      token && !isAdmin && navigate("/profile");
+      token && isAdmin == "false" && navigate("/user/explore");
+      token && isAdmin == "true" && navigate("/myCampground");
     }
 
-    // const auth = ["/login","/register","/forgotpassword"];
+    const auth = ["/login","/register","/forgotpassword"];
+    token && auth.includes(location.pathname) && navigate(-1)
     // token && auth.includes(location.pathname) && navigate("/profile");
     // !token && !auth.includes(location.pathname) && navigate("/login");
   }
@@ -45,6 +47,8 @@ const headset=()=>{
   location.pathname == "/user/wishlist" && dispatch(addNavData("Wishlist"));
   location.pathname == "/user/booking" && dispatch(addNavData("Your Booking"));
 }
+
+
 
   useEffect(()=>{
     authChecker();
