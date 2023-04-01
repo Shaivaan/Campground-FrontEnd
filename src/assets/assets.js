@@ -32,3 +32,5 @@ export const get_all_wishlist_api = `${base_url}/api/v1/wishlist`;
 export const get_all_bokked_trips = `${base_url}/api/v1/paid/upcomingTrips`;
 export const send_rating_api = (campId) => `${base_url}/api/v1/utils/rating/${campId}`;
 export const can_add_rtaing_api = (campId) => `${base_url}/api/v1/utils/showRating/${campId}`;
+export const map_api_key = "AIzaSyB2sic-kLLni4IQPUKQS4iimj0kK6XG3GE";
+export const clientId = '532654142650-6ji64gcc9o6ubmgnv0ks66tvee0fp69r.apps.googleusercontent.com';

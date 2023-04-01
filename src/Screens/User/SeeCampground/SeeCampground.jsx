@@ -3,12 +3,12 @@ import React, { useEffect, useState } from "react";
 import styles from "./SeeCampground.module.css";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
-import { GoLocation } from "react-icons/go";
 import { useLocation, useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+// import GoogleMapReact from "google-map-react";
 
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import {
@@ -32,7 +32,7 @@ import { Formik } from "formik";
 import { person_book_details } from "../../../assets/formAssets/initialValues";
 import { person_campground_book_validation } from "../../../assets/formAssets/validationSchema";
 import DetailsCard from "../../../Components/DetailsCard/DetailsCard";
-import { fake_payment_api, send_booking_details_api } from "../../../assets/assets";
+import { fake_payment_api, map_api_key, send_booking_details_api } from "../../../assets/assets";
 import FakePayment from "../../../Components/FakePayment/FakePayment";
 import Succeedded from "../../../Components/Succeedded/Succeedded";
 import { AiOutlineClose, AiOutlineCloseCircle } from "react-icons/ai";
@@ -61,6 +61,8 @@ function SeeCampground() {
     1024: { items: 1 },
   };
   const data = location.state.data;
+  const map = {lat:data.location.coordinates[0],lng:data.location.coordinates[1]};
+
   const items = [
     <img
       src={data.images[0]}
@@ -120,6 +122,14 @@ function SeeCampground() {
       {data.recommendation && (
         <Box className={styles.recom}>100% Recommended</Box>
       )}
+
+<iframe
+  width="600"
+  height="450"
+  frameborder="0"
+  src={`https://www.google.com/maps/embed/v1/place?key=${map_api_key}&q=${+map.lat},${+map.lng}&zoom=13`}>
+</iframe>
+
 
       <Box><Rating name="read-only" value={data.overallRating} readOnly /></Box> 
       <Box component={"h3"}>Campground Visited: {data.visitCount}</Box> 
@@ -201,7 +211,7 @@ function HorizontalLinearStepper({campId,price}) {
   });
 
   useEffect(()=>{
-    setDetailstoAdd({...detailstoAdd,dates:[...value],days: value[1].diff(value[0], 'day')+1})
+    setDetailstoAdd({...detailstoAdd,dates:[...value],days: dayjs(value[1]).diff(dayjs(value[0]), 'day')+1})
   },[value[0],value[1]]) 
 
   const [activeStep, setActiveStep] = React.useState(0);
@@ -253,13 +263,18 @@ function HorizontalLinearStepper({campId,price}) {
 
   const sendBookingDetails = ()=>{
     setProgress(true);
+
+   const details = detailstoAdd;
+   details.dates[1] = details.dates[1].set('hour', 23).set('minute', 59).set('second',59);
+
+    
     fetch(`${send_booking_details_api}`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
         "Content-type": "application/json; charset=UTF-8",
       },
-      body: JSON.stringify(detailstoAdd),
+      body: JSON.stringify(details),
     })
       .then((res) => {
         res.json().then((res) => {

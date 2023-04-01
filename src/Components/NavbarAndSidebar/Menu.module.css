@@ -1,3 +1,31 @@
 .icon{
     font-size: 22px;
 }
+
+.landNav{
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    top: 0;
+    position: sticky;
+    background-color: white;
+    z-index: 1;
+}
+
+.navLogo{
+    height: 80%;
+    width: 40px ;
+    color: purple;
+    opacity: 0.6;
+}
+
+.logiDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px;
+    font-size: 20px;
+    font-family: initial;
+    font-style: italic;
+}

@@ -23,9 +23,8 @@ import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../Footer/Footer';
 import { useSelector } from 'react-redux';
-// import Chart from './Chart';
-// import Deposits from './Deposits';
-// import Orders from './Orders';
+import { GiCampingTent } from 'react-icons/gi';
+import styles from "./Menu.module.css";
 
 function Copyright(props) {
   return (
@@ -160,6 +159,10 @@ function Dashboard({element}) {
               px: [1],
             }}
           >
+            <Box className={styles.logiDiv}>
+            <GiCampingTent className={styles.navLogo}/>
+            <Box>Camping Cubs</Box>
+        </Box>
             <IconButton onClick={toggleDrawer}>
               <ChevronLeftIcon />
             </IconButton>

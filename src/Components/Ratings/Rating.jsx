@@ -3,12 +3,17 @@ import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import { can_add_rtaing_api, send_rating_api } from '../../assets/assets';
 import './StarRating.css';
+import CustomSnackBar from '../Snackbar/Snackbar';
 
 function StarRating({campId}) {
   const [rating, setRating] = useState(0);
   const [hoveredRating, setHoveredRating] = useState(0);
   const [review,setReview] = useState("");
   const [canAddRate,setCanAddRate] = useState(false);
+
+  const [snackBarVisible, setSnackBarVisible] = useState(false);
+  const [snackBarMessage, setSnackBarMessage] = useState("");
+  const [messageType, setMessageType] = useState("");
 
   function handleRatingClick(ratingValue) {
     setRating(ratingValue);
@@ -38,17 +43,14 @@ function StarRating({campId}) {
       .catch((res) => {
        
       });
-      
   }
   
-
   function handleEmojiHover(e, ratingValue) {
     if (ratingValue > rating) {
       e.target.style.transform = 'scale(1.2)';
       setHoveredRating(ratingValue);
     }
   }
-
 
   const rating_api = ()=>{
     fetch(`${send_rating_api(campId)}`, {
@@ -61,8 +63,10 @@ function StarRating({campId}) {
     })
       .then((res) => {
         res.json().then((res) => {
-          res.details && setPriceData({people:res.details.length,price:price,days:res.days,cartId:res._id})
-          setActiveStep(1);
+            setSnackBarMessage("Thanks for rating");
+            setMessageType("success");
+            setSnackBarVisible(true);
+            setCanAddRate(false);
         })
         .finally((res)=>{
           setProgress(false);
@@ -90,6 +94,11 @@ function StarRating({campId}) {
 
   return (
     <>
+     <CustomSnackBar
+          snackBarVisible={snackBarVisible}
+          message={snackBarMessage}
+          messageType={messageType}
+        />
     {canAddRate && <div style={{textAlign:'center'}}>
       <h2>Please rate your experience:</h2>
       <div className='star-container'>
@@ -164,6 +173,8 @@ function StarRating({campId}) {
         <Button  variant='outlined' style={{flex:1}} onClick={rating_api}>Add Review</Button>
       </Box>
     </div>}
+
+    {!canAddRate && <TextField fullWidth value={"You have rated this campground already!"} disabled={true}/>}
     
     </>
   );

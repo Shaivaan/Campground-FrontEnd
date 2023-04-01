@@ -16,7 +16,6 @@ import ExploreCamps from '../Screens/User/ExploreCamps/ExploreCamps';
 import SeeCampground from '../Screens/User/SeeCampground/SeeCampground';
 import Wishlist from '../Screens/User/Wishlist/Wishlist';
 import Booking from '../Screens/User/Booking/Booking';
-import { gapi } from 'gapi-script';
 
 function Routers() {
   const navigate = useNavigate();

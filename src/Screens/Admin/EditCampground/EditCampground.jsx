@@ -56,6 +56,7 @@ import CustomSnackBar from "../../../Components/Snackbar/Snackbar";
         highlight: data.highlight,
         price: data.price,
         city: data.location.city,
+        rentals:data.rentals,
         address: data.location.address,
         pincode: data.location.pincode,
         state: data.location.state,
@@ -285,6 +286,26 @@ import CustomSnackBar from "../../../Components/Snackbar/Snackbar";
                             errors.description + "*"}
                         </Box>
                       </Box>
+                      <Box>
+                      <Box className={styles.label}>Campground Type</Box>
+                      <Box>
+                        <FormControl fullWidth>
+                          <Select
+                            fullWidth
+                            name="rentals"
+                            id="rentals"
+                            value={values.rentals}
+                            onChange={handleChange}
+                          >
+                            <MenuItem value={"tent"}>Tent</MenuItem>
+                            <MenuItem value={"cottage"}>Cottage</MenuItem>
+                          </Select>
+                        </FormControl>
+                      </Box>
+                      <Box className={styles.errorText}>
+                        {errors.rentals && touched.rentals && errors.rentals + "*"}
+                      </Box>
+                    </Box>
                       <Box>
                         <Box className={styles.label}>Price (in ₹)</Box>
                         <Box>

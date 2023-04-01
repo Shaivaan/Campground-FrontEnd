@@ -10,7 +10,7 @@ import {
   Slide,
 } from "@mui/material";
 import styles from "../Authentication.module.css";
-import { google_auth, login_api, logo } from "../../../assets/assets";
+import { clientId, google_auth, login_api, logo } from "../../../assets/assets";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { login_validation_schema } from "../../../assets/formAssets/validationSchema";
 import { login_initial_values } from "../../../assets/formAssets/initialValues";
@@ -21,7 +21,6 @@ import { GoogleLogin } from 'react-google-login';
 import { gapi } from "gapi-script";
 
 function Login() {
-  const clientId = '242039989369-5kkbaclujoumai4lmsttbo7dq12tslmq.apps.googleusercontent.com';
   const [showPassword, setShowPassword] = useState("password");
   const navigate = useNavigate();
   const [snackBarVisible, setSnackBarVisible] = useState(false);
@@ -42,6 +41,12 @@ function Login() {
 
   const onSuccess = (GoogleUser) => {
     console.log(GoogleUser);
+    const data= {
+      email: GoogleUser.profileObj.email,
+      password:GoogleUser.Ca
+    }
+     handleLogin(data);
+
   };
 
   const onFailure = (error) => {
@@ -109,6 +114,16 @@ function Login() {
   const handleGoogleAuth = ()=>{
   window.location.href = "http://camp-ground-csyy.onrender.com/auth/google";
   }
+
+
+  useEffect(()=>{
+    gapi.load("client:auth2", () => {
+      gapi.client.init({
+        clientId:
+         clientId,
+      });
+    });
+  },[])
 
   return (
     <>

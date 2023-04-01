@@ -112,7 +112,7 @@ export const MainListItems = () => {
           </ListItemIcon>
           <ListItemText primary="Profile" />
         </ListItemButton>
-        <ListItemButton>
+        <ListItemButton onClick={handleLogout}>
           <ListItemIcon>
             <RiLogoutBoxRLine className={styles.icon}/>
           </ListItemIcon>

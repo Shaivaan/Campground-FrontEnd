@@ -42,6 +42,7 @@ export const add_campground_initial_values = {
   description: "",
   highlight: [],
   price: "",
+  rentals:"tent",
   city: "",
   address: "",
   pincode: "",

@@ -2,6 +2,7 @@ import {
   Button,
   FormControl,
   IconButton,
+  InputLabel,
   MenuItem,
   Modal,
   Select,
@@ -63,7 +64,7 @@ function AddCampground() {
       });
   };
 
-  const addCampground = (data,resetForm) => {
+  const addCampground = (data, resetForm) => {
     fetch(`${add_campground_api}`, {
       method: "POST",
       headers: {
@@ -74,8 +75,7 @@ function AddCampground() {
     })
       .then((res) => {
         res.json().then((res) => {
-          
-          if(res.name){
+          if (res.name) {
             setSnackBarMessage("Campground Added Successfully!");
             setMessageType("success");
             setSnackBarVisible(true);
@@ -85,12 +85,10 @@ function AddCampground() {
       })
       .catch((res) => {
         setSnackBarMessage("Something Went Wrong!");
-            setMessageType("error");
-            setSnackBarVisible(true);
+        setMessageType("error");
+        setSnackBarVisible(true);
       });
   };
-
-
 
   const getState = () => {
     fetch(`${get_state_api}`)
@@ -122,8 +120,12 @@ function AddCampground() {
 
   return (
     <>
-      <Box >
-        <CustomSnackBar snackBarVisible={snackBarVisible} message={snackBarMessage} messageType={messageType}/>
+      <Box>
+        <CustomSnackBar
+          snackBarVisible={snackBarVisible}
+          message={snackBarMessage}
+          messageType={messageType}
+        />
         <Formik
           initialValues={add_campground_initial_values}
           onSubmit={(values, { resetForm }) => {
@@ -146,7 +148,7 @@ function AddCampground() {
               pincode: +values.pincode,
               coordinates: values.coordinates,
             };
-            addCampground(dataToSend,resetForm);
+            addCampground(dataToSend, resetForm);
             // console.log(dataToSend);
           }}
           validationSchema={add_campground_validation_schema}
@@ -219,6 +221,28 @@ function AddCampground() {
                           errors.description + "*"}
                       </Box>
                     </Box>
+
+                    <Box>
+                      <Box className={styles.label}>Campground Type</Box>
+                      <Box>
+                        <FormControl fullWidth>
+                          <Select
+                            fullWidth
+                            name="rentals"
+                            id="rentals"
+                            value={values.rentals}
+                            onChange={handleChange}
+                          >
+                            <MenuItem value={"tent"}>Tent</MenuItem>
+                            <MenuItem value={"cottage"}>Cottage</MenuItem>
+                          </Select>
+                        </FormControl>
+                      </Box>
+                      <Box className={styles.errorText}>
+                        {errors.rentals && touched.rentals && errors.rentals + "*"}
+                      </Box>
+                    </Box>
+
                     <Box>
                       <Box className={styles.label}>Price (in ₹)</Box>
                       <Box>
@@ -371,7 +395,19 @@ function AddCampground() {
                     <Box>
                       <Box className={styles.label}>Image 1</Box>
                       <Box>
-                        <TextField value={values.image1} autoComplete="off" onChange={(e)=>{handleChangeValues( setFieldValue,"image1",e.target.value)}} placeholder="Add Link1" fullWidth />{" "}
+                        <TextField
+                          value={values.image1}
+                          autoComplete="off"
+                          onChange={(e) => {
+                            handleChangeValues(
+                              setFieldValue,
+                              "image1",
+                              e.target.value
+                            );
+                          }}
+                          placeholder="Add Link1"
+                          fullWidth
+                        />{" "}
                       </Box>
                       <Box className={styles.errorText}>
                         {errors.image1 && touched.image1 && errors.image1 + "*"}
@@ -380,7 +416,19 @@ function AddCampground() {
                     <Box>
                       <Box className={styles.label}>Image 2</Box>
                       <Box>
-                        <TextField value={values.image2} autoComplete="off" onChange={(e)=>{handleChangeValues( setFieldValue,"image2",e.target.value)}} placeholder="Add Link2" fullWidth />{" "}
+                        <TextField
+                          value={values.image2}
+                          autoComplete="off"
+                          onChange={(e) => {
+                            handleChangeValues(
+                              setFieldValue,
+                              "image2",
+                              e.target.value
+                            );
+                          }}
+                          placeholder="Add Link2"
+                          fullWidth
+                        />{" "}
                       </Box>
                       <Box className={styles.errorText}>
                         {errors.image2 && touched.image2 && errors.image2 + "*"}
@@ -389,7 +437,19 @@ function AddCampground() {
                     <Box>
                       <Box className={styles.label}>Image 3</Box>
                       <Box>
-                        <TextField value={values.image3} autoComplete="off" onChange={(e)=>{handleChangeValues( setFieldValue,"image3",e.target.value)}} placeholder="Add Link3" fullWidth />{" "}
+                        <TextField
+                          value={values.image3}
+                          autoComplete="off"
+                          onChange={(e) => {
+                            handleChangeValues(
+                              setFieldValue,
+                              "image3",
+                              e.target.value
+                            );
+                          }}
+                          placeholder="Add Link3"
+                          fullWidth
+                        />{" "}
                       </Box>
                       <Box className={styles.errorText}>
                         {errors.image3 && touched.image3 && errors.image3 + "*"}
@@ -398,7 +458,19 @@ function AddCampground() {
                     <Box>
                       <Box className={styles.label}>Image 4</Box>
                       <Box>
-                        <TextField value={values.image4} autoComplete="off" onChange={(e)=>{handleChangeValues( setFieldValue,"image4",e.target.value)}} placeholder="Add Link4" fullWidth />{" "}
+                        <TextField
+                          value={values.image4}
+                          autoComplete="off"
+                          onChange={(e) => {
+                            handleChangeValues(
+                              setFieldValue,
+                              "image4",
+                              e.target.value
+                            );
+                          }}
+                          placeholder="Add Link4"
+                          fullWidth
+                        />{" "}
                       </Box>
                       <Box className={styles.errorText}>
                         {errors.image4 && touched.image4 && errors.image4 + "*"}

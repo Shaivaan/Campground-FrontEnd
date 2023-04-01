@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import styles from "../Authentication.module.css";
 import {
+  clientId,
   logo,
   register_api,
   snackMessagePosition,
@@ -27,6 +28,9 @@ import { register_initial_values } from "../../../assets/formAssets/initialValue
 import { Link, useNavigate } from "react-router-dom";
 import {TbInfoHexagon} from "react-icons/tb";
 import { AccountInfoModal } from "../../../Components/Modals/AccountInfoModal";
+import { GoogleLogin } from 'react-google-login';
+import { gapi } from "gapi-script";
+import { FcGoogle } from "react-icons/fc";
 
 function Register() {
   const [showPassword, setShowPassword] = useState("password");
@@ -40,6 +44,47 @@ function Register() {
     showPassword == "text" && setShowPassword("password");
   };
 
+    useEffect(()=>{
+    gapi.load("client:auth2", () => {
+      gapi.client.init({
+        clientId:
+         clientId,
+      });
+    });
+  },[])
+
+    const onSuccess = (GoogleUser) => {
+    console.log(GoogleUser);
+    const data= {
+      full_name: GoogleUser.profileObj.name,
+      email: GoogleUser.profileObj.email,
+      password:GoogleUser.Ca
+    }
+    handleRegister(data);
+
+  };
+
+  const onFailure = (error) => {
+    console.error(error);
+  };
+
+
+  
+  const LoginButton=()=>{
+    return     <GoogleLogin
+    render={(renderProp) => {
+      return (
+        <Button variant={"outlined"} fullWidth onClick={renderProp.onClick} disabled={renderProp.disabled}>
+        <FcGoogle className={styles.googleIcon} />
+        Login With Google
+      </Button>
+      );
+    }}
+    clientId={clientId}
+    buttonText="Login with Google"
+    onSuccess={onSuccess}
+    onFailure={onFailure}/>
+  }
 
   const handleSnackBarClose = () => {
     setSnackBarVisible(false);
@@ -78,7 +123,7 @@ function Register() {
       setSnackBarMessage("Registered Succesfully");
       setSnackBarVisible(true);
       localStorage.setItem("token", res.token);
-      localStorage.setItem("isAdmin", res.user.token);
+      localStorage.setItem("isAdmin", res.user.admin);
       setTimeout(() => {
         navigate("/");
       }, 2000);
@@ -344,6 +389,7 @@ function Register() {
                   <Box textAlign={"center"}>
                     Already have an account? <Link to={"/login"}>Login</Link>
                   </Box>
+                  <LoginButton/>
                 </Box>
               </form>
             )}

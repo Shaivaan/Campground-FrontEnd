@@ -211,7 +211,7 @@ function CampModal({open,handleClose,modalData,bookingType}) {
                 </Box>
                 <Box>
                 <Box className={styles.label}>Price</Box>
-                <Box>₹ {modalData.campId.price * modalData.details.length * moment(modalData.dates[1]).diff(moment(modalData.dates[0]), 'days')}</Box>
+                <Box>₹ {modalData.campId.price * modalData.details.length * modalData.days}</Box>
                 </Box>
 
                 <Box>
