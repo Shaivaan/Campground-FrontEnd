@@ -390,7 +390,7 @@ function Register() {
                     Already have an account? <Link to={"/login"}>Login</Link>
                   </Box>
                   <Box className={styles.centerAlign}>OR</Box>
-                  <LoginButton/>
+                  <Box marginBottom={"15px"}><LoginButton/></Box> 
                 </Box>
               </form>
             )}

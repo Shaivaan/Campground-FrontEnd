@@ -7,8 +7,7 @@ export const snackMessagePosition = {
 
 
 // Api's
-const base_url = "https://camp-ground-csyy.onrender.com";
-// const base_url = "http://localhost:3000"
+const base_url = import.meta.env.VITE_BASE_URL;
 export const login_api = `${base_url}/api/v1/login`;
 export const register_api = `${base_url}/api/v1/register`;
 export const google_auth = `${base_url}/auth/google`;
@@ -32,5 +31,5 @@ export const get_all_wishlist_api = `${base_url}/api/v1/wishlist`;
 export const get_all_bokked_trips = `${base_url}/api/v1/paid/upcomingTrips`;
 export const send_rating_api = (campId) => `${base_url}/api/v1/utils/rating/${campId}`;
 export const can_add_rtaing_api = (campId) => `${base_url}/api/v1/utils/showRating/${campId}`;
-export const map_api_key = "AIzaSyB2sic-kLLni4IQPUKQS4iimj0kK6XG3GE";
-export const clientId = '532654142650-6ji64gcc9o6ubmgnv0ks66tvee0fp69r.apps.googleusercontent.com';
+export const map_api_key = import.meta.env.VITE_MAP_API_KEY;
+export const clientId = import.meta.env.VITE_CLIENT_ID;
