@@ -76,7 +76,7 @@ function Register() {
       return (
         <Button variant={"outlined"} fullWidth onClick={renderProp.onClick} disabled={renderProp.disabled}>
         <FcGoogle className={styles.googleIcon} />
-        Login With Google
+        Register With Google
       </Button>
       );
     }}
@@ -389,6 +389,7 @@ function Register() {
                   <Box textAlign={"center"}>
                     Already have an account? <Link to={"/login"}>Login</Link>
                   </Box>
+                  <Box className={styles.centerAlign}>OR</Box>
                   <LoginButton/>
                 </Box>
               </form>
