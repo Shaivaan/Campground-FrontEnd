@@ -11,7 +11,7 @@ function LandingPage() {
   const navigate = useNavigate();
   const handleNavigate = ()=>{
     const token = localStorage.getItem("token");
-    !token && navigate("/auth/login");
+    !token && navigate("/login");
   }
 
   return (
