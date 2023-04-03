@@ -123,6 +123,7 @@ function Login() {
          clientId,
       });
     });
+    console.log(import.meta.env.VITE_BASE_URL);
   },[])
 
   return (
