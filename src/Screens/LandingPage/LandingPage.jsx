@@ -8,8 +8,11 @@ import styles from "./LandingPage.module.css";
 import LandingNavbar from './Navbar';
 
 function LandingPage() {
-
-
+  const navigate = useNavigate();
+  const handleNavigate = ()=>{
+    const token = localStorage.getItem("token");
+    !token && navigate("/auth/login");
+  }
 
   return (
     <>
@@ -19,7 +22,7 @@ function LandingPage() {
           <Box className = {styles.container1}>
            <Box className = {styles.headStart}>Camping Cubs</Box>
            <Box className = {styles.title}>A family that camps together, stays together.</Box>
-            <Button variant='contained' color='secondary'>Explore Camps</Button>
+            <Button onClick={handleNavigate} variant='contained' color='secondary'>Explore Camps</Button>
           </Box>
         </Box>
 
