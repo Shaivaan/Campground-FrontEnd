@@ -11,12 +11,9 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import { MainListItems } from './Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
@@ -26,18 +23,6 @@ import { useSelector } from 'react-redux';
 import { GiCampingTent } from 'react-icons/gi';
 import styles from "./Menu.module.css";
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 
 
@@ -102,9 +87,10 @@ function Dashboard({element}) {
     navigate("/login");
   }
 
-  React.useEffect(()=>{
-    console.log(nav_head);
-  })
+  const handleHomeNavigate = ()=>{
+    navigate("/");
+  }
+
 
   return (
     <>
@@ -159,10 +145,12 @@ function Dashboard({element}) {
               px: [1],
             }}
           >
+            <IconButton  onClick={handleHomeNavigate}>
             <Box className={styles.logiDiv}>
             <GiCampingTent className={styles.navLogo}/>
             <Box>Camping Cubs</Box>
-        </Box>
+           </Box>
+            </IconButton>
             <IconButton onClick={toggleDrawer}>
               <ChevronLeftIcon />
             </IconButton>

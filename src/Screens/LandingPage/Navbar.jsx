@@ -14,8 +14,6 @@ function LandingNavbar() {
             <Box>Camping Cubs</Box>
         </Box>
         <Box className={styles.navButtonDiv}>
-            {/* <Box>Explore</Box> */}
-            {/* <Box>Terms & Conditions</Box> */}
             <Box><Button onClick={()=>navigate("/login")} style={{color:"grey"}} variant='text' color='info'>Login</Button></Box>
             <Box><Button onClick={()=>navigate("/register")} style={{color:"grey"}} variant='text' color='info'>Register</Button></Box>
         </Box>

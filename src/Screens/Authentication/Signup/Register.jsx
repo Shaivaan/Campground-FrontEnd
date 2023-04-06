@@ -11,24 +11,17 @@ import {
   Snackbar,
   Alert,
   Slide,
-  Tooltip,
-  
 } from "@mui/material";
 import styles from "../Authentication.module.css";
-import {
-  clientId,
-  logo,
-  register_api,
-  snackMessagePosition,
-} from "../../../assets/assets";
+import { clientId, logo, register_api } from "../../../assets/assets";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Formik } from "formik";
 import { register_validation_schema } from "../../../assets/formAssets/validationSchema";
 import { register_initial_values } from "../../../assets/formAssets/initialValues";
 import { Link, useNavigate } from "react-router-dom";
-import {TbInfoHexagon} from "react-icons/tb";
+import { TbInfoHexagon } from "react-icons/tb";
 import { AccountInfoModal } from "../../../Components/Modals/AccountInfoModal";
-import { GoogleLogin } from 'react-google-login';
+import { GoogleLogin } from "react-google-login";
 import { gapi } from "gapi-script";
 import { FcGoogle } from "react-icons/fc";
 
@@ -44,47 +37,51 @@ function Register() {
     showPassword == "text" && setShowPassword("password");
   };
 
-    useEffect(()=>{
+  useEffect(() => {
     gapi.load("client:auth2", () => {
       gapi.client.init({
-        clientId:
-         clientId,
+        clientId: clientId,
       });
     });
-  },[])
+  }, []);
 
-    const onSuccess = (GoogleUser) => {
+  const onSuccess = (GoogleUser) => {
     console.log(GoogleUser);
-    const data= {
+    const data = {
       full_name: GoogleUser.profileObj.name,
       email: GoogleUser.profileObj.email,
-      password:GoogleUser.Ca
-    }
+      password: GoogleUser.Ca,
+    };
     handleRegister(data);
-
   };
 
   const onFailure = (error) => {
     console.error(error);
   };
 
-
-  
-  const LoginButton=()=>{
-    return     <GoogleLogin
-    render={(renderProp) => {
-      return (
-        <Button variant={"outlined"} fullWidth onClick={renderProp.onClick} disabled={renderProp.disabled}>
-        <FcGoogle className={styles.googleIcon} />
-        Register With Google
-      </Button>
-      );
-    }}
-    clientId={clientId}
-    buttonText="Login with Google"
-    onSuccess={onSuccess}
-    onFailure={onFailure}/>
-  }
+  const LoginButton = () => {
+    return (
+      <GoogleLogin
+        render={(renderProp) => {
+          return (
+            <Button
+              variant={"outlined"}
+              fullWidth
+              onClick={renderProp.onClick}
+              disabled={renderProp.disabled}
+            >
+              <FcGoogle className={styles.googleIcon} />
+              Register With Google
+            </Button>
+          );
+        }}
+        clientId={clientId}
+        buttonText="Login with Google"
+        onSuccess={onSuccess}
+        onFailure={onFailure}
+      />
+    );
+  };
 
   const handleSnackBarClose = () => {
     setSnackBarVisible(false);
@@ -137,10 +134,11 @@ function Register() {
   return (
     <>
       <Box className={styles.main}>
-        <Box className={styles.auth_left}>
-        </Box>
+        <Box className={styles.auth_left}></Box>
         <Box className={styles.auth_right}>
-        <Box className={styles.logoBox}><img className={styles.small_logo} src={logo} /></Box>
+          <Box onClick={() => navigate("/")} className={styles.logoBox}>
+            <img className={styles.small_logo} src={logo} />
+          </Box>
           <Formik
             initialValues={register_initial_values}
             onSubmit={(values) => {
@@ -151,7 +149,6 @@ function Register() {
               } else {
                 data.admin = false;
               }
-              console.log(data);
               handleRegister(data);
             }}
             validationSchema={register_validation_schema}
@@ -164,7 +161,6 @@ function Register() {
               touched,
               handleChange,
               handleSubmit,
-              isSubmitting,
               setFieldValue,
             }) => (
               <form onSubmit={handleSubmit}>
@@ -318,11 +314,10 @@ function Register() {
                   </Box>
 
                   <Box>
-                    <Box className={styles.account_type}>      
-                    <Box className={styles.label}>Account Type  
+                    <Box className={styles.account_type}>
+                      <Box className={styles.label}>Account Type</Box>
+                      <AccountInfoModal />
                     </Box>
-                    <AccountInfoModal/>
-                    </Box>      
 
                     <RadioGroup
                       onChange={handleChange}
@@ -330,7 +325,7 @@ function Register() {
                       row
                       aria-labelledby="demo-row-radio-buttons-group-label"
                       name="admin"
-                      >
+                    >
                       <FormControlLabel
                         value={"user"}
                         control={<Radio />}
@@ -350,33 +345,33 @@ function Register() {
                     </RadioGroup>
                   </Box>
 
-                     {values.admin == "admin" &&     <Box>
-                    <Box className={styles.label}>Aadhaar Number</Box>
+                  {values.admin == "admin" && (
                     <Box>
-                      <TextField
-                        onChange={(e) => {
-                          handleChangeValues(
-                            setFieldValue,
-                            "aadhar",
-                            e.target.value.trim()
-                          );
-                        }}
-                        name={"aadhar"}
-                        
-                        autoComplete={"off"}
-                        fullWidth
-                        value={values.aadhar}
-                        size={"small"}
-                        placeholder={"Enter Aadhaar Number"}
-                      />
-                      <Box className={styles.errorText}>
-                        {errors.aadhar &&
-                          touched.aadhar &&
-                          errors.aadhar + "*"}
+                      <Box className={styles.label}>Aadhaar Number</Box>
+                      <Box>
+                        <TextField
+                          onChange={(e) => {
+                            handleChangeValues(
+                              setFieldValue,
+                              "aadhar",
+                              e.target.value.trim()
+                            );
+                          }}
+                          name={"aadhar"}
+                          autoComplete={"off"}
+                          fullWidth
+                          value={values.aadhar}
+                          size={"small"}
+                          placeholder={"Enter Aadhaar Number"}
+                        />
+                        <Box className={styles.errorText}>
+                          {errors.aadhar &&
+                            touched.aadhar &&
+                            errors.aadhar + "*"}
+                        </Box>
                       </Box>
                     </Box>
-                  </Box>}     
-                
+                  )}
 
                   <Button
                     style={{ marginTop: "15px" }}
@@ -390,31 +385,31 @@ function Register() {
                     Already have an account? <Link to={"/login"}>Login</Link>
                   </Box>
                   <Box className={styles.centerAlign}>OR</Box>
-                  <Box marginBottom={"15px"}><LoginButton/></Box> 
+                  <Box marginBottom={"15px"}>
+                    <LoginButton />
+                  </Box>
                 </Box>
               </form>
             )}
           </Formik>
         </Box>
       </Box>
-      <Box className={styles.parallel}>
-        {" "}
-      </Box>
-        <Snackbar
-          TransitionComponent={TransitionRight}
-          open={snackBarVisible}
-          anchorOrigin={{ vertical: "top", horizontal: "right" }}
-          autoHideDuration={2000}
+      <Box className={styles.parallel}> </Box>
+      <Snackbar
+        TransitionComponent={TransitionRight}
+        open={snackBarVisible}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        autoHideDuration={2000}
+        onClose={handleSnackBarClose}
+      >
+        <Alert
           onClose={handleSnackBarClose}
+          severity={messageType}
+          sx={{ width: "100%" }}
         >
-          <Alert
-            onClose={handleSnackBarClose}
-            severity={messageType}
-            sx={{ width: "100%" }}
-          >
-            {snackBarMessage}
-          </Alert>
-        </Snackbar>
+          {snackBarMessage}
+        </Alert>
+      </Snackbar>
     </>
   );
 }

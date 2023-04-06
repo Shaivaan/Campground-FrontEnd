@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Modal, Typography } from "@mui/material";
+import {  Modal, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { TbInfoHexagon } from "react-icons/tb";
 
@@ -17,8 +17,6 @@ export const AccountInfoModal = () => {
     bgcolor: "white",
     padding: "20px",
     borderRadius: "10px",
-    // boxShadow: 24,
-    // p: 4,
   };
 
   return (

@@ -5,7 +5,6 @@ import { FakePaymentValue } from '../../assets/formAssets/initialValues';
 import { fakepaymentSchema } from '../../assets/formAssets/validationSchema';
 import styles from "./FakePayment.module.css";
 import {RiMastercardFill, RiVisaLine} from "react-icons/ri";
-import {FaCcMastercard} from "react-icons/fa";
 
 function FakePayment({priceData,bookCampgroundApi}) {
 
@@ -25,10 +24,7 @@ function FakePayment({priceData,bookCampgroundApi}) {
               errors,
               touched,
               handleChange,
-              handleBlur,
               handleSubmit,
-              setFieldValue,
-              isSubmitting,
               /* and other goodies */
             }) => (
               <form onSubmit={handleSubmit}>

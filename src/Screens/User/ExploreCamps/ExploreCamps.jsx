@@ -9,7 +9,6 @@ import {
   Popover,
   Select,
   TextField,
-  Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
@@ -118,7 +117,7 @@ function ExploreCamps() {
               autoComplete="off"
               placeholder="Search by Name"
             />
-          </Box>
+          </Box> 
           <Box>
             <FilterPopover
              getCamps = {getUserCampgrounds}
@@ -196,8 +195,6 @@ const FilterPopover = ({ filter, setFilter, value,getCamps,geolocation }) => {
         },
       });
     }
-
-    // e.target.name == "distance" && setFilter({...value,filters:{...value.filters,longitude:geolocation.coords.longitude,latitude:geolocation.coords.latitude}});
 
 
   };

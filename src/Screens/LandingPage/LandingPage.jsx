@@ -6,17 +6,22 @@ import DummyCampCard from '../../Components/DummyCampCard/DummyCampCard';
 import Footer from '../../Components/Footer/Footer';
 import styles from "./LandingPage.module.css";
 import LandingNavbar from './Navbar';
+import ChatBot from '../../Components/ChatBot/ChatBot';
 
 function LandingPage() {
   const navigate = useNavigate();
   const handleNavigate = ()=>{
     const token = localStorage.getItem("token");
+    const isAdmin = localStorage.getItem("isAdmin");
     !token && navigate("/login");
+    token && isAdmin == "false" && navigate("/user/explore")
+    token && isAdmin == "true" && navigate("/myCampground")
   }
 
   return (
     <>
         <LandingNavbar/>
+        <ChatBot/>
     <Box className = {styles.main}>
         <Box className = {styles.start}>
           <Box className = {styles.container1}>

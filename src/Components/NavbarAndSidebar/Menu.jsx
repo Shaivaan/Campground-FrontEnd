@@ -13,6 +13,7 @@ import {SlCalender} from 'react-icons/sl';
 import {MdAccountCircle} from "react-icons/md";
 import {RiLogoutBoxRLine} from "react-icons/ri";
 import styles from "./Menu.module.css";
+import { FaFreeCodeCamp } from "react-icons/fa";
 
 export const MainListItems = () => {
   const navigate = useNavigate();
@@ -88,6 +89,16 @@ export const MainListItems = () => {
                 <BsClipboardHeart className={styles.icon}/>
               </ListItemIcon>
               <ListItemText primary="Wishlist" />
+            </ListItemButton>
+            <ListItemButton
+              onClick={() => {
+                navigate("/user/suggestion");
+              }}
+            >
+              <ListItemIcon>
+                <FaFreeCodeCamp className={styles.icon}/>
+              </ListItemIcon>
+              <ListItemText primary="Suggested Camps" />
             </ListItemButton>
             <ListItemButton
               onClick={() => {

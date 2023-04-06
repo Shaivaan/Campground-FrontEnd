@@ -1,5 +1,5 @@
 import { Box, Modal, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./BookingCard.module.css";
 import { GoLocation } from "react-icons/go";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -27,7 +27,6 @@ const style = {
   };
 
 function BookingCard({ cardData, data ,bookingType}) {
-  const navigate = useNavigate();
   const [isModalOpen,setIsModalOpen] = useState(false);
   const [activeImage, setActiveImage] = useState(0);
   const [snackBarVisible, setSnackBarVisible] = useState(false);
@@ -61,13 +60,6 @@ function BookingCard({ cardData, data ,bookingType}) {
   const handleOpen = () => setIsModalOpen(true);
   const handleClose = () => setIsModalOpen(false);
 
-  const handleSnackMessage = (boolean) => {
-    console.log("iddhar", boolean);
-    boolean && setSnackBarMessage("Added To Favourites");
-    !boolean && setSnackBarMessage("Removed From Favourites");
-    setMessageType("success");
-    setSnackBarVisible(!snackBarVisible);
-  };
 
   return (
     <>

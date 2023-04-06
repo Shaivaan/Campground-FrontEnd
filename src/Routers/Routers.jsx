@@ -16,6 +16,7 @@ import ExploreCamps from '../Screens/User/ExploreCamps/ExploreCamps';
 import SeeCampground from '../Screens/User/SeeCampground/SeeCampground';
 import Wishlist from '../Screens/User/Wishlist/Wishlist';
 import Booking from '../Screens/User/Booking/Booking';
+import Suggestion from '../Screens/User/Suggestion/Suggestion';
 
 function Routers() {
   const navigate = useNavigate();
@@ -25,9 +26,9 @@ function Routers() {
     const token = localStorage.getItem("token");
     const isAdmin = localStorage.getItem("isAdmin");
     if(location.pathname == "/"){
-      console.log(isAdmin);
       token && isAdmin == "false" && navigate("/user/explore");
       token && isAdmin == "true" && navigate("/myCampground");
+      return
     }
 
     const auth = ["/login","/register","/forgotpassword"];
@@ -37,7 +38,6 @@ function Routers() {
   }
 
 const headset=()=>{
-  console.log(location.pathname)
   location.pathname == "/addcampground"  && dispatch(addNavData("Add a Campground"));
   location.pathname == "/"  && dispatch(addNavData("Camping Cubs"));
   location.pathname == "/profile" && dispatch(addNavData("Profile"));
@@ -45,12 +45,13 @@ const headset=()=>{
   location.pathname == "/user/explore" && dispatch(addNavData("Explore Campgrounds"));
   location.pathname == "/user/wishlist" && dispatch(addNavData("Wishlist"));
   location.pathname == "/user/booking" && dispatch(addNavData("Your Booking"));
+  location.pathname == "/user/suggestion" && dispatch(addNavData("Suggested Campground"));
 }
 
 
 
   useEffect(()=>{
-    authChecker();
+    // authChecker();
     headset();
   },[location.pathname])
 
@@ -69,6 +70,7 @@ const headset=()=>{
             <Route path='/user/seeCampground' element={<Dashboard element={<SeeCampground/>}/>}/>
             <Route path='/user/wishlist' element={<Dashboard element={<Wishlist/>}/>}/>
             <Route path='/user/booking' element={<Dashboard element={<Booking/>}/>}/>
+            <Route path='/user/suggestion' element={<Dashboard element={<Suggestion/>}/>}/>
         </Routes>
     </Box>
   )

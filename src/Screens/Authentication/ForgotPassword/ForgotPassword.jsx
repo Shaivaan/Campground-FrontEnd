@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Box, TextField, Button, Snackbar, Alert, Slide, IconButton, InputAdornment } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Button,
+  Snackbar,
+  Alert,
+  Slide,
+  IconButton,
+  InputAdornment,
+} from "@mui/material";
 import styles from "../Authentication.module.css";
 import {
   check_otp_api,
@@ -18,9 +27,7 @@ import {
   password_initial_values,
 } from "../../../assets/formAssets/initialValues";
 import { Formik } from "formik";
-import { Link, useNavigate } from "react-router-dom";
-import { GoogleLogin } from "react-google-login";
-import { style } from "@mui/system";
+import { useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 function ForgotPassword() {
@@ -33,8 +40,7 @@ function ForgotPassword() {
   const [resetPassword, setResetPassword] = useState(false);
   const [resetEmail, setResetEmail] = useState("");
   const [showPassword, setShowPassword] = useState("password");
-  const [otpTimer,setOtpTimer] = useState(60);
-
+  const [otpTimer, setOtpTimer] = useState(60);
 
   const TransitionRight = (props) => {
     return <Slide {...props} direction="right" />;
@@ -48,27 +54,26 @@ function ForgotPassword() {
     navigate(-1);
   };
 
-
   useEffect(() => {
-   if(otpVisible && !resetPassword){
-    interval = setInterval(() => {
-      setOtpTimer(prevTimer => prevTimer - 1);
-    }, 1000);
-  } 
+    if (otpVisible && !resetPassword) {
+      interval = setInterval(() => {
+        setOtpTimer((prevTimer) => prevTimer - 1);
+      }, 1000);
+    }
 
-  if(otpTimer == 0){
-    clearInterval(interval);
-    setOtpVisible(false);
-    setSnackBarMessage("OTP expired")
-    setMessageType("error");
-    setSnackBarVisible(true);
-  }
+    if (otpTimer == 0) {
+      clearInterval(interval);
+      setOtpVisible(false);
+      setSnackBarMessage("OTP expired");
+      setMessageType("error");
+      setSnackBarVisible(true);
+    }
 
     // Cleanup function to clear the interval
     return () => {
       clearInterval(interval);
     };
-  }, [otpVisible,otpTimer]);
+  }, [otpVisible, otpTimer]);
 
   const handleShowPassword = () => {
     showPassword == "password" && setShowPassword("text");
@@ -125,7 +130,6 @@ function ForgotPassword() {
         res.json().then((res) => {
           res.message == "OTP sent successfully" && setOtpVisible(true);
           handleSnackProcess(res);
-          
         });
       })
       .catch((res) => {
@@ -135,9 +139,9 @@ function ForgotPassword() {
 
   const startTimer = () => {
     setInterval(() => {
-      setOtpTimer(prevTimer => prevTimer - 1);
-     }, 1000);
-  }
+      setOtpTimer((prevTimer) => prevTimer - 1);
+    }, 1000);
+  };
 
   const handleCheckOtp = (data) => {
     data.otp = +data.otp;
@@ -157,12 +161,14 @@ function ForgotPassword() {
             setSnackBarVisible(true);
             setResetPassword(true);
             setResetEmail(data.email);
-            console.log(data);
           } else {
             setSnackBarMessage(res.message);
-            res.message = "Invalid OTP" && setMessageType("error") && setTimeout(()=>{
-              startTimer()
-            },2000);
+            res.message =
+              "Invalid OTP" &&
+              setMessageType("error") &&
+              setTimeout(() => {
+                startTimer();
+              }, 2000);
             setSnackBarVisible(true);
           }
         });
@@ -177,7 +183,9 @@ function ForgotPassword() {
       <Box className={styles.main}>
         <Box className={styles.auth_left}></Box>
         <Box className={styles.auth_right}>
-        <Box className={styles.logoBox}><img className={styles.small_logo} src={logo} /></Box>
+          <Box className={styles.logoBox}>
+            <img className={styles.small_logo} src={logo} />
+          </Box>
           <Formik
             initialValues={
               !otpVisible ? forgot_password_values : forgot_password_otp
@@ -185,8 +193,6 @@ function ForgotPassword() {
             onSubmit={(values) => {
               !otpVisible && handleSendOtp(values);
               otpVisible && handleCheckOtp(values);
-
-              // handleForgotPassword(values);
             }}
             validationSchema={!otpVisible ? forgot_password_schema : otp_schema}
             validateOnChange={true}
@@ -283,7 +289,6 @@ function ForgotPassword() {
                       <Formik
                         initialValues={password_initial_values}
                         onSubmit={(values, { setSubmitting }) => {
-                          console.log(values);
                           handleResetPassword(values);
                         }}
                         validationSchema={password_schema}
@@ -291,12 +296,11 @@ function ForgotPassword() {
                         validateOnBlur={true}
                       >
                         {({
-                          values,
                           errors,
                           touched,
                           handleChange,
                           handleSubmit,
-                          isSubmitting,
+
                           /* and other goodies */
                         }) => (
                           <form>
@@ -370,23 +374,16 @@ function ForgotPassword() {
             {snackBarMessage}
           </Alert>
         </Snackbar>
-
       </Box>
-        <Snackbar
-          // TransitionComponent={TransitionRight}
-          open={otpVisible && !resetPassword}
-          anchorOrigin={{ vertical: "top", horizontal: "left" }}
-          autoHideDuration={2000}
-          // onClose={handleSnackBarClose}
-        >
-          <Alert
-            // onClose={handleSnackBarClose}
-            severity={"info"}
-            sx={{ width: "100%" }}
-          >
-            {`00 : ` + otpTimer + ` seconds`}
-          </Alert>
-        </Snackbar>
+      <Snackbar
+        open={otpVisible && !resetPassword}
+        anchorOrigin={{ vertical: "top", horizontal: "left" }}
+        autoHideDuration={2000}
+      >
+        <Alert severity={"info"} sx={{ width: "100%" }}>
+          {`00 : ` + otpTimer + ` seconds`}
+        </Alert>
+      </Snackbar>
     </>
   );
 }

@@ -1,13 +1,10 @@
 import {
   Button,
   FormControl,
-  IconButton,
-  InputLabel,
   MenuItem,
   Modal,
   Select,
   TextField,
-  Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { Formik } from "formik";
@@ -20,7 +17,6 @@ import {
 } from "../../../assets/assets";
 import { add_campground_initial_values } from "../../../assets/formAssets/initialValues";
 import styles from "./AddCampground.module.css";
-import { IoAddCircleOutline, IoCloseOutline } from "react-icons/io5";
 import { add_campground_validation_schema } from "../../../assets/formAssets/validationSchema";
 import CustomSnackBar from "../../../Components/Snackbar/Snackbar";
 
@@ -149,7 +145,6 @@ function AddCampground() {
               coordinates: values.coordinates,
             };
             addCampground(dataToSend, resetForm);
-            // console.log(dataToSend);
           }}
           validationSchema={add_campground_validation_schema}
           validateOnChange={true}
@@ -159,7 +154,6 @@ function AddCampground() {
             values,
             errors,
             touched,
-            isSubmitting,
             handleChange,
             handleSubmit,
             setFieldValue,

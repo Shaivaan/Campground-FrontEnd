@@ -29,7 +29,6 @@ function Booking() {
         res
           .json()
           .then((res) => {
-            console.log(res);
             setCampgroundData({ ...res });
           })
           .finally((res) => {

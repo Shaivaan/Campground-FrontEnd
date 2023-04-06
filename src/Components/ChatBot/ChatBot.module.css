@@ -1,0 +1,89 @@
+.chatbot {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 350px;
+    height: 550px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .chatbotIcon{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 10px;
+  }
+  
+
+  .online{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    flex: 1;
+
+  }
+
+  .badge{
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+  }
+
+  .head{
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .grey{
+    color: grey;
+  }
+
+  .messageShowContainer{
+    flex: 6;
+    padding: 10px 10px;
+    background-color: rgb(234, 238, 243);
+    overflow-y: auto;
+  }
+
+  .botMsg{
+    display: flex;
+    justify-content: start;
+    margin-bottom: 10px;
+  }
+
+  .botMsg > div{
+    background-color: white;
+    border-radius: 10px 5px 5px 10px;
+    color: black;
+    padding: 15px 15px;
+    font-size: 15px;
+  }
+
+  .myMsg{
+    display: flex;
+    justify-content: end;
+    margin-bottom: 10px;
+  }
+  
+  .myMsg > div{
+    background-color: rgb(0, 102, 255);
+    border-radius: 10px 5px 5px 10px;
+    padding: 5px;
+    color: white;
+    padding: 15px 15px;
+    font-size: 15px;
+  }
+
+
+  .messageInputContainer{
+    flex: 1;
+    padding: 5px 10px;
+  }
+
+  

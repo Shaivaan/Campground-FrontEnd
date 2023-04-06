@@ -1,5 +1,5 @@
 import { Box, Rating } from '@mui/material';
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import styles from "./CampCard.module.css";
 import {GoLocation} from "react-icons/go"
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -20,7 +20,6 @@ function CampCard({cardData,setCampgroundData,campgroundData,visitor}) {
 
   useEffect(() => {
     if (isActive) {
-      console.log(activeImage);
       changeImage = setInterval(() => {
          setActiveImage((activeImage) => activeImage == cardData.images.length-1 ? 0 : activeImage+1)   
       }, 1000);
@@ -80,7 +79,6 @@ function CampCard({cardData,setCampgroundData,campgroundData,visitor}) {
   };
 
   const handleSnackMessage=(boolean)=>{
-     console.log("iddhar",boolean);
      boolean && setSnackBarMessage("Added To Favourites")
      !boolean && setSnackBarMessage("Removed From Favourites")
      setMessageType("success") ;

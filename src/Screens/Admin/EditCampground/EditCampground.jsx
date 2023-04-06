@@ -1,27 +1,22 @@
 import {
     Button,
     FormControl,
-    IconButton,
     MenuItem,
     Modal,
     Select,
     TextField,
-    Typography,
   } from "@mui/material";
   import { Box } from "@mui/system";
   import { Formik } from "formik";
   import React, { useEffect, useState } from "react";
   import {
-    add_campground_api,
     delete_campground_api,
     get_cities_api,
     get_pincode_lat_lon_api,
     get_state_api,
     update_campground_api,
   } from "../../../assets/assets";
-  import { add_campground_initial_values } from "../../../assets/formAssets/initialValues";
   import styles from "./EditCampground.module.css";
-  import { IoAddCircleOutline, IoCloseOutline } from "react-icons/io5";
   import { add_campground_validation_schema } from "../../../assets/formAssets/validationSchema";
 import { useLocation, useNavigate } from "react-router-dom";
 import CustomSnackBar from "../../../Components/Snackbar/Snackbar";
@@ -138,24 +133,6 @@ import CustomSnackBar from "../../../Components/Snackbar/Snackbar";
         });
     };
 
-
-    // const updateFetchedData = (res)=>{
-    //     setInitialValues({
-    //     name: res.name,
-    //     description: res.description,
-    //     highlight: res.highlight,
-    //     price: res.price,
-    //     city: res.location.city,
-    //     address: res.location.address,
-    //     pincode: res.location.pincode,
-    //     state: res.location.state,
-    //     coordinates: res.location.coordinates, // latitude then longitude order is importent
-    //     image1:res.images[0],
-    //     image2:res.images[1],
-    //     image3:res.images[2],
-    //     image4:res.images[3]
-    //     })
-    // }
   
     const getState = () => {
       fetch(`${get_state_api}`)
@@ -182,7 +159,6 @@ import CustomSnackBar from "../../../Components/Snackbar/Snackbar";
     };
   
     useEffect(() => {
-      console.log(location.state.data)  ;
       getState();
     }, []);
   
@@ -214,7 +190,6 @@ import CustomSnackBar from "../../../Components/Snackbar/Snackbar";
                 type:"Point"
               };
               editCampground(dataToSend,resetForm);
-              console.log(dataToSend);
             }}
             validationSchema={add_campground_validation_schema}
             validateOnChange={true}
@@ -224,7 +199,6 @@ import CustomSnackBar from "../../../Components/Snackbar/Snackbar";
               values,
               errors,
               touched,
-              isSubmitting,
               handleChange,
               handleSubmit,
               setFieldValue,

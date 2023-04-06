@@ -31,5 +31,7 @@ export const get_all_wishlist_api = `${base_url}/api/v1/wishlist`;
 export const get_all_bokked_trips = `${base_url}/api/v1/paid/upcomingTrips`;
 export const send_rating_api = (campId) => `${base_url}/api/v1/utils/rating/${campId}`;
 export const can_add_rtaing_api = (campId) => `${base_url}/api/v1/utils/showRating/${campId}`;
+export const chat_bot_api = `${base_url}/api/v1/chat`;
+export const suggested_camps_api = `${base_url}/api/v1/suggestions`;
 export const map_api_key = import.meta.env.VITE_MAP_API_KEY;
 export const clientId = import.meta.env.VITE_CLIENT_ID;
