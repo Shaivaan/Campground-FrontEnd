@@ -14,6 +14,7 @@ import {MdAccountCircle} from "react-icons/md";
 import {RiLogoutBoxRLine} from "react-icons/ri";
 import styles from "./Menu.module.css";
 import { FaFreeCodeCamp } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 export const MainListItems = () => {
   const navigate = useNavigate();
@@ -24,11 +25,23 @@ export const MainListItems = () => {
       return false;
     }
   };
+  const nav_head = useSelector((store)=>{return store.nav_head});
 
   const handleLogout = () => {
     localStorage.clear();
-    navigate("/login");
+    navigate('/login', { replace: true });
   };
+
+  const styling=(head)=>{
+    const style= {backgroundColor:"#e9e9e9"};
+    if(head == nav_head){
+      return style;
+    }else{
+      return null;
+    }
+  }
+
+
   return (
     <>
       <React.Fragment>
@@ -39,6 +52,7 @@ export const MainListItems = () => {
               onClick={() => {
                 navigate("/myCampground");
               }}
+              style={styling("My Campgrounds")}
             >
               <ListItemIcon>
                 <WhatshotIcon />
@@ -49,6 +63,7 @@ export const MainListItems = () => {
               onClick={() => {
                 navigate("/user/explore");
               }}
+              style={styling("Explore Campgrounds")}
             >
               <ListItemIcon>
                 <GiCampfire className={styles.icon}/>
@@ -59,6 +74,7 @@ export const MainListItems = () => {
               onClick={() => {
                 navigate("/addcampground");
               }}
+              style={styling("Add a Campground")}
             >
               <ListItemIcon>
                 <AddIcon />
@@ -74,6 +90,7 @@ export const MainListItems = () => {
               onClick={() => {
                 navigate("/user/explore");
               }}
+              style={styling("Explore Campgrounds")}
             >
               <ListItemIcon>
                 <GiCampfire className={styles.icon}/>
@@ -84,6 +101,7 @@ export const MainListItems = () => {
               onClick={() => {
                 navigate("/user/wishlist");
               }}
+              style={styling("Wishlist")}
             >
               <ListItemIcon>
                 <BsClipboardHeart className={styles.icon}/>
@@ -94,6 +112,7 @@ export const MainListItems = () => {
               onClick={() => {
                 navigate("/user/suggestion");
               }}
+              style={styling("Suggested Campground")}
             >
               <ListItemIcon>
                 <FaFreeCodeCamp className={styles.icon}/>
@@ -104,6 +123,7 @@ export const MainListItems = () => {
               onClick={() => {
                 navigate("/user/booking");
               }}
+              style={styling("Your Booking")}
             >
               <ListItemIcon>
                 <SlCalender className={styles.icon}/>
@@ -117,6 +137,7 @@ export const MainListItems = () => {
           onClick={() => {
             navigate("/profile");
           }}
+          style={styling("Profile")}
         >
           <ListItemIcon>
             <MdAccountCircle className={styles.icon}/>
