@@ -75,6 +75,7 @@ const mdTheme = createTheme();
 
 function Dashboard({element}) {
   const [open, setOpen] = React.useState(true);
+  const dashboardRef = React.useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
   const toggleDrawer = () => {
@@ -90,6 +91,14 @@ function Dashboard({element}) {
   const handleHomeNavigate = ()=>{
     navigate("/");
   }
+
+  function scrollToBottom() {
+    dashboardRef.current.scrollTop = 0;
+  }
+
+  React.useEffect(()=>{
+    scrollToBottom();
+  },[location.pathname])
 
 
   return (
@@ -164,6 +173,7 @@ function Dashboard({element}) {
         </Drawer>
         <Box
           component="main"
+          ref={dashboardRef}
           sx={{
             backgroundColor: (theme) =>
               theme.palette.mode === 'light'
